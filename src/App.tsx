@@ -5,16 +5,20 @@ import './index.css';
 import { createGlobalStyle } from "styled-components";
 import Header from "./components/Header";
 import Wrapper from "./components/Wrapper";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 const App = () => {
   return (
-    <div className="App">
-        <Wrapper>
-          <Header>История кыргызстана</Header>
-          <GlobalStyles />
-          <RootRouter />
-        </Wrapper>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+          <Wrapper>
+            <Header>История кыргызстана</Header>
+            <GlobalStyles />
+            <RootRouter />
+          </Wrapper>
+      </div>
+    </Provider>
   );
 };
 
