@@ -1,16 +1,29 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Admin from "./pages/Admin/Admin";
 import RootRouter from "./router/RootRouter";
 
 import './index.css';
+import { createGlobalStyle } from "styled-components";
+import Header from "./components/Header";
+import Wrapper from "./components/Wrapper";
 
 const App = () => {
   return (
     <div className="App">
-        <RootRouter />
+        <Wrapper>
+          <Header>История кыргызстана</Header>
+          <GlobalStyles />
+          <RootRouter />
+        </Wrapper>
     </div>
   );
 };
+
+const GlobalStyles = createGlobalStyle`
+  html {
+    --primary-color: #f9f9ff;
+    --accent-color: #5547f0;
+    --text-color: #28254A;
+  }
+`
 
 export default App;
