@@ -5,11 +5,11 @@ export const initialState: AuthState = {
     loggedIn: false
 }
 
-const auth = (state: AuthState = initialState, action: AuthAction) => {
+const authReducer = (state: AuthState = initialState, action: AuthAction) => {
     switch (action.type) {
         case ActionTypes.SET_LOGGED_IN:
             return { ...state, loggedIn: action.payload}
     }
 }
 
-export default auth;
+export default authReducer;

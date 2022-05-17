@@ -19,7 +19,7 @@ const Home = () => {
   );
 };
 
-const Container = styled.div`
+export const Container = styled.div`
   background-color: var(--primary-color);
   display: flex;
   flex-direction: column;

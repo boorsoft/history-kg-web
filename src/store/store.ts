@@ -2,10 +2,12 @@ import { applyMiddleware, createStore, StoreEnhancer } from "redux"
 import thunk from "redux-thunk"
 
 import reducers from "./reducers"
-import { initialState } from "./auth/reducer";
+import { initialState as authState } from "./auth/reducer";
+import { initialState as appState } from "./app/reducer";
 
 const rootState = {
-    auth: initialState
+    auth: authState,
+    app: appState
 }
 
 const middlewares = [thunk]
