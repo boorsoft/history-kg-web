@@ -8,11 +8,12 @@ import { Container } from "../Home/Home";
 import * as appActions from './../../store/app/actions';
 import ParagraphSelector from "./components/ParagraphSelector";;
 import { ROUTES } from '../../constants/routes';
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 const Paragraphs: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { paragraphs } = useSelector((state: RootState) => state.app);
+  const { paragraphs, paragraphs: { isLoading } } = useSelector((state: RootState) => state.app);
   
   const { fetchParagraphs } = bindActionCreators(appActions, dispatch);
 
@@ -22,7 +23,8 @@ const Paragraphs: FC = () => {
 
   return (
     <Container>
-      {paragraphs.data.map((paragraph: Paragraph) => (
+      {isLoading && <LoadingSpinner />}
+      {!isLoading && paragraphs.data.map((paragraph: Paragraph) => (
         <ParagraphSelector key={paragraph.id} paragraph={paragraph} route={`${ROUTES.PARAGRAPHS}/${paragraph.id}`} />
       ))}
     </Container>

@@ -14,9 +14,9 @@ export const initialState: AppState = {
 const appReducer = (state: AppState = initialState, action: AppActions) => {
     switch (action.type) {
         case ActionTypes.SET_PARAGRAPHS:
-            return { ...state, paragraphs: { ...state.paragraphs, data: action.payload } };
+            return { ...state, paragraphs: { ...state.paragraphs, data: action.payload, isLoading: false } };
         case ActionTypes.SET_CURRENT_PARAGRAPH:
-            return { ...state, paragraphs: {...state.paragraphs, currentParagraph: action.payload} };
+            return { ...state, paragraphs: {...state.paragraphs, currentParagraph: action.payload, isLoading: false} };
         case ActionTypes.SET_PERSONS:
             return { ...state, persons: action.payload };
         case ActionTypes.SET_QUIZZES:

@@ -9,13 +9,14 @@ import parseHtml from 'html-react-parser';
 import { fetchParagraphById } from "../../../store/app/actions";
 
 import { AppDispatch, RootState } from "../../../store/store";
+import LoadingSpinner from "../../../components/LoadingSpinner";
 
 const Paragraph: FC = () => {
     const { id } = useParams();
 
     const dispatch = useDispatch<AppDispatch>();
 
-    const { currentParagraph } = useSelector((state: RootState) => state.app.paragraphs);
+    const { currentParagraph, isLoading } = useSelector((state: RootState) => state.app.paragraphs);
 
     const fetchParagraph = bindActionCreators(fetchParagraphById, dispatch);
 
@@ -26,7 +27,8 @@ const Paragraph: FC = () => {
 
     return (
         <Container>
-            {parseHtml(currentParagraph)}
+            {isLoading && <LoadingSpinner />}
+            {!isLoading && parseHtml(currentParagraph)}
         </Container>
     )
 }
