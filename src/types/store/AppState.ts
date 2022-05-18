@@ -19,7 +19,11 @@ export interface Quiz {
 }
 
 export interface AppState {
-    paragraphs: Paragraph[];
+    paragraphs: {
+        data: Paragraph[];
+        isLoading: boolean;
+        currentParagraph: string;
+    };
     persons: Person[];
     quizzes: Quiz[];
 }

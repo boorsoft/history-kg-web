@@ -1,23 +1,28 @@
-import { applyMiddleware, createStore, StoreEnhancer } from "redux"
-import thunk from "redux-thunk"
+import { applyMiddleware, StoreEnhancer } from "redux";
+import thunk from "redux-thunk";
 
-import reducers from "./reducers"
+import reducers from "./reducers";
 import { initialState as authState } from "./auth/reducer";
 import { initialState as appState } from "./app/reducer";
+import { configureStore } from "@reduxjs/toolkit";
 
 const rootState = {
-    auth: authState,
-    app: appState
-}
+  auth: authState,
+  app: appState,
+};
 
-const middlewares = [thunk]
+const middlewares = [thunk];
 
-const enhancer: StoreEnhancer = applyMiddleware(...middlewares)  
+const enhancer: StoreEnhancer = applyMiddleware(...middlewares);
 
-const store = createStore(reducers, rootState, enhancer)
+const store = configureStore({
+  reducer: reducers,
+  enhancers: [enhancer],
+  preloadedState: rootState,
+});
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
 
-export type AppDispatch = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch;
 
-export default store
+export default store;

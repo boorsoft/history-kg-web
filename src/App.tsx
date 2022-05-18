@@ -13,7 +13,7 @@ const App = () => {
     <Provider store={store}>
       <div className="App">
           <Wrapper>
-            <Header>История кыргызстана</Header>
+            <Header>История Кыргызстана</Header> 
             <GlobalStyles />
             <RootRouter />
           </Wrapper>
