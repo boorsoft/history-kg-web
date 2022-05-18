@@ -7,7 +7,11 @@ export const initialState: AppState = {
         isLoading: true,
         currentParagraph: ''
     },
-    persons: [],
+    persons: {
+        data: [],
+        isLoading: true,
+        currentPerson: ''
+    },
     quizzes: []
 }
 
@@ -18,7 +22,9 @@ const appReducer = (state: AppState = initialState, action: AppActions) => {
         case ActionTypes.SET_CURRENT_PARAGRAPH:
             return { ...state, paragraphs: {...state.paragraphs, currentParagraph: action.payload, isLoading: false} };
         case ActionTypes.SET_PERSONS:
-            return { ...state, persons: action.payload };
+            return { ...state, persons: {...state.persons, data: action.payload, isLoading: false } };
+        case ActionTypes.SET_CURRENT_PERSON:
+            return { ...state, persons: { ...state.persons, currentPerson: action.payload, isLoading: false} };
         case ActionTypes.SET_QUIZZES:
             return { ...state, quizzes: action.payload };
         default:

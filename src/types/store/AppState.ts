@@ -24,6 +24,10 @@ export interface AppState {
         isLoading: boolean;
         currentParagraph: string;
     };
-    persons: Person[];
+    persons: {
+        data: Person[];
+        isLoading: boolean;
+        currentPerson: string;
+    }
     quizzes: Quiz[];
 }

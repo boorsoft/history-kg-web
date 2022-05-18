@@ -22,7 +22,6 @@ const Paragraph: FC = () => {
 
     useEffect(() => {
         id && fetchParagraph(+id);
-        console.log(currentParagraph)
     }, [])
 
     return (
@@ -35,6 +34,7 @@ const Paragraph: FC = () => {
 
 const Container = styled.div`
     padding: 25px;
+    width: clamp(450px, 50vw, 700px);
 `
 
 export default Paragraph;
