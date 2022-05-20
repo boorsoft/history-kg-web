@@ -1,22 +1,16 @@
 import React from "react";
-import styled from "styled-components";
-import Wrapper from "../../components/Wrapper";
+import { Admin, Resource } from 'react-admin'
+import restProvider from 'ra-data-simple-rest'
 
-const Admin = () => {
+import { API_URL } from "../../constants/constants";
+import ParagraphsList from './components/ParagraphsList';
+
+const AdminPage = () => {
     return (
-        <Wrapper>
-            <Sidebar>
-            </Sidebar>
-        </Wrapper>
+        <Admin basename="/admin" dataProvider={restProvider(API_URL)}>
+            <Resource name="paragraphs" list={ParagraphsList} />
+        </Admin>
     )
 }
 
-const Sidebar = styled.div`
-    width: 30%;
-    height: 100vh;
-    overflow-y: scroll;
-    scrollbar-width: 0;
-    background: #333;
-`
-
-export default Admin;
+export default AdminPage;
