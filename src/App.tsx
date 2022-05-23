@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import RootRouter from "./router/RootRouter";
 
 import './index.css';
@@ -9,11 +9,11 @@ import { Provider } from "react-redux";
 import store from "./store/store";
 
 const App = () => {
+
   return (
     <Provider store={store}>
       <div className="App">
           <Wrapper>
-            <Header>История Кыргызстана</Header> 
             <GlobalStyles />
             <RootRouter />
           </Wrapper>

@@ -2,10 +2,10 @@ import React from "react";
 import { FC } from "react";
 import styled from "styled-components";
 
-const Header: FC<{children?: string}> = ({children}) => {
+const Header: FC<{title: string}> = ({title}) => {
     return (
         <StyledHeader>
-            <Title>{children}</Title>
+            <Title>{title}</Title>
         </StyledHeader>
     )
 }
