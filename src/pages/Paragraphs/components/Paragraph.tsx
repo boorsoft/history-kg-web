@@ -6,7 +6,7 @@ import { bindActionCreators } from "redux";
 import styled from "styled-components";
 import parseHtml from 'html-react-parser';
 
-import { fetchParagraphById } from "../../../store/app/actions";
+import { fetchParagraphById } from "../../../store/app/actionCreators";
 
 import { AppDispatch, RootState } from "../../../store/store";
 import LoadingSpinner from "../../../components/LoadingSpinner";

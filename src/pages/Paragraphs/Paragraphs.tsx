@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";;
 import { AppDispatch, RootState } from "./../../store/store";
 import { Paragraph } from "./../../types/store/AppState";
 import { Container } from "../Home/Home";
-import * as appActions from './../../store/app/actions';
+import * as appActions from '../../store/app/actionCreators';
 import ParagraphSelector from "./components/ParagraphSelector";;
 import { ROUTES } from '../../constants/routes';
 import LoadingSpinner from "../../components/LoadingSpinner";

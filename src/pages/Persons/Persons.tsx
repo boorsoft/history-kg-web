@@ -3,7 +3,7 @@ import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import LoadingSpinner from "../../components/LoadingSpinner";
-import { fetchPersons } from "../../store/app/actions";
+import { fetchPersons } from "../../store/app/actionCreators";
 import { AppDispatch, RootState } from "../../store/store";
 import { Person } from "../../types/store/AppState";
 
