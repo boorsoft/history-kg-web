@@ -22,12 +22,12 @@ export interface AppState {
     paragraphs: {
         data: Paragraph[];
         isLoading: boolean;
-        currentParagraph: string;
+        currentParagraph?: Paragraph;
     };
     persons: {
         data: Person[];
         isLoading: boolean;
-        currentPerson: string;
+        currentPerson?: Person;
     }
     quizzes: Quiz[];
 }

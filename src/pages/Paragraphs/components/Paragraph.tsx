@@ -27,7 +27,7 @@ const Paragraph: FC = () => {
     return (
         <Container>
             {isLoading && <LoadingSpinner />}
-            {!isLoading && parseHtml(currentParagraph)}
+            {!isLoading && currentParagraph && parseHtml(currentParagraph.text)}
         </Container>
     )
 }

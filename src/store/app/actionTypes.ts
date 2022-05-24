@@ -15,7 +15,7 @@ export type ParagraphsAction = {
 
 export type CurrentParagraphAction = {
   type: ActionTypes.SET_CURRENT_PARAGRAPH;
-  payload: string;
+  payload: Paragraph;
 };
 
 export type PersonsAction = {
@@ -25,7 +25,7 @@ export type PersonsAction = {
 
 export type CurrentPersonAction = {
   type: ActionTypes.SET_CURRENT_PERSON;
-  payload: string;
+  payload: Person;
 }
 
 export type QuizAction = {

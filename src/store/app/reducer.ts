@@ -5,12 +5,12 @@ export const initialState: AppState = {
     paragraphs: {
         data: [],
         isLoading: true,
-        currentParagraph: ''
+        currentParagraph: undefined
     },
     persons: {
         data: [],
         isLoading: true,
-        currentPerson: ''
+        currentPerson: undefined
     },
     quizzes: []
 }
