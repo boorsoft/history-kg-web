@@ -14,7 +14,7 @@ import authProvider from "./authProvider";
 
 const AdminPage = () => {
     return (
-        <Admin basename="/admin" authProvider={authProvider} dataProvider={restProvider(API_URL)}>
+        <Admin basename="/admin" authProvider={authProvider} dataProvider={restProvider(API_URL)} requireAuth>
             <Resource name="paragraphs" list={ParagraphsList} create={ParagraphCreate} edit={ParagraphEdit} />
             <Resource name="persons" list={PersonsList} create={PersonCreate} edit={PersonEdit} />
         </Admin>

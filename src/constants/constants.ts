@@ -1,5 +1,5 @@
-export const BASE_URL = 'http://172.104.235.166:3000'
+export const BASE_URL = 'http://historykg.boorsoft.com'
 export const LOGIN_URL = `${BASE_URL}/auth/login`
-export const API_URL = 'http://172.104.235.166:3000/api'
+export const API_URL = `${BASE_URL}/api`
 export const API_PARAGRAPHS_URL = `${API_URL}/paragraphs`
 export const API_PERSONS_URL = `${API_URL}/persons`
