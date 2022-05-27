@@ -25,16 +25,30 @@ const Paragraph: FC = () => {
     }, [])
 
     return (
-        <Container>
-            {isLoading && <LoadingSpinner />}
-            {!isLoading && currentParagraph && parseHtml(currentParagraph.text)}
-        </Container>
+        <Wrapper>
+            <Container>
+                {isLoading && <LoadingSpinner />}
+                <Text>
+                    {!isLoading && currentParagraph && parseHtml(currentParagraph.text)}
+                </Text>
+            </Container>
+        </Wrapper>
     )
 }
 
+const Wrapper = styled.div`
+    display: flex;
+    justify-content: center;
+`
+
 const Container = styled.div`
-    padding: 25px;
-    width: clamp(450px, 50vw, 700px);
+    padding: 10px;
+    width: clamp(350px, 40vw, 500px);
+`
+
+const Text = styled.div`
+    margin: auto;
+    max-width: 500px;
 `
 
 export default Paragraph;
