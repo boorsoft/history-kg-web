@@ -12,27 +12,25 @@ import {
   QuoteButtons,
   ClearButtons,
   useTiptapEditor,
+  RichTextInputProps
 } from "ra-input-rich-text";
 import Image from "@tiptap/extension-image";
 
-type Props = {
-  source: string;
-};
+const CustomRichTextInput: FC<RichTextInputProps> = ({...props}: RichTextInputProps) => {
 
-const CustomRichTextInput: FC<Props> = ({ source, ...props }: any) => {
-    const editor = useTiptapEditor();
+    const editor = useTiptapEditor()
 
     const addImage = useCallback(() => {
         const url = window.prompt('URL')
     
         if (url) {
-          editor.chain().focus().setImage({ src: url }).run()
+          editor.chain().focus().setImage({src: url}).run();  
         }
-    }, [editor])
+
+    }, [])
 
   return (
     <RichTextInput
-      source={source}
       editorOptions={{
         ...DefaultEditorOptions,
         extensions: [...DefaultEditorOptions.extensions, Image],
@@ -51,6 +49,7 @@ const CustomRichTextInput: FC<Props> = ({ source, ...props }: any) => {
           </div>
         </RichTextInputToolbar>
       }
+      {...props}
     ></RichTextInput>
   );
 };
