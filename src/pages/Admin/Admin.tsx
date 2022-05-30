@@ -11,6 +11,9 @@ import PersonsList from "./components/Person/PersonsList";
 import PersonCreate from "./components/Person/PersonCreate";
 import PersonEdit from "./components/Person/PersonEdit";
 import authProvider from "./authProvider";
+import QuizList from "./components/Quiz/QuizList";
+import QuizCreate from "./components/Quiz/QuizCreate";
+import QuizEdit from "./components/Quiz/QuizEdit";
 
 const httpClient = (url: string, options: Options = {}) => {
   if (!options.headers) {
@@ -41,6 +44,12 @@ const AdminPage = () => {
         list={PersonsList}
         create={PersonCreate}
         edit={PersonEdit}
+      />
+      <Resource 
+        name="quiz"
+        list={QuizList}
+        create={QuizCreate}
+        edit={QuizEdit}      
       />
     </Admin>
   );
