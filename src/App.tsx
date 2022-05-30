@@ -27,6 +27,7 @@ const GlobalStyles = createGlobalStyle`
     --primary-color: #f9f9ff;
     --accent-color: #5547f0;
     --text-color: #28254A;
+    --secondary-text-color: #706CA4;
   }
 `
 

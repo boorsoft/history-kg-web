@@ -12,7 +12,11 @@ export const initialState: AppState = {
         isLoading: true,
         currentPerson: undefined
     },
-    quizzes: []
+    quizzes: {
+        data: [],
+        isLoading: true,
+        currentQuiz: undefined
+    }
 }
 
 const appReducer = (state: AppState = initialState, action: AppActions) => {
@@ -26,7 +30,9 @@ const appReducer = (state: AppState = initialState, action: AppActions) => {
         case ActionTypes.SET_CURRENT_PERSON:
             return { ...state, persons: { ...state.persons, currentPerson: action.payload, isLoading: false} };
         case ActionTypes.SET_QUIZZES:
-            return { ...state, quizzes: action.payload };
+            return { ...state, quizzes: {...state.quizzes, data: action.payload, isLoading: false} };
+        case ActionTypes.SET_CURRENT_QUIZ:
+            return { ...state, quizzes: {...state.quizzes, currentQuiz: action.payload, isLaoding: false} };
         default:
             return {...state}
     }

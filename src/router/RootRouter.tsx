@@ -7,6 +7,7 @@ import Paragraph from "../pages/Paragraphs/components/Paragraph";
 import Paragraphs from "../pages/Paragraphs/Paragraphs";
 import PersonPage from "../pages/Persons/components/PersonPage";
 import Persons from "../pages/Persons/Persons";
+import QuizMenu from "../pages/Quiz/QuizMenu";
 
 const RootRouter = () => {
     return (
@@ -17,6 +18,7 @@ const RootRouter = () => {
                     <Route path={ROUTES.HOME} element={<Home />} />
                     <Route path={ROUTES.PERSONS} element={<Persons />} />
                     <Route path={ROUTES.PARAGRAPHS} element={<Paragraphs />} />
+                    <Route path={ROUTES.QUIZ} element={<QuizMenu />} />
                     <Route path={`${ROUTES.PARAGRAPHS}/:id`} element={<Paragraph />} />
                     <Route path={`${ROUTES.PERSONS}/:id`} element={<PersonPage />} />
                 </Routes>

@@ -13,9 +13,21 @@ export interface Person {
     image: string;
 }
 
+export interface Answer {
+    id: number;
+    text: string;
+    isCorrectAnswer: boolean;
+}
+export interface Question {
+    id: number;
+    text: string;
+    answers: Answer[];
+}
+
 export interface Quiz {
     id: number;
     title: string;
+    questions: Question[];
 }
 
 export interface AppState {
@@ -29,5 +41,9 @@ export interface AppState {
         isLoading: boolean;
         currentPerson?: Person;
     }
-    quizzes: Quiz[];
+    quizzes: {
+        data: Quiz[];
+        isLoading: boolean;
+        currentQuiz?: Quiz;
+    }
 }

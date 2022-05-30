@@ -6,6 +6,7 @@ export enum ActionTypes {
   SET_PERSONS = "SET_PERSONS",
   SET_CURRENT_PERSON = "SET_CURRENT_PERSON",
   SET_QUIZZES = "SET_QUIZZES",
+  SET_CURRENT_QUIZ = "SET_CURRENT_QUIZ"
 }
 
 export type ParagraphsAction = {
@@ -33,9 +34,15 @@ export type QuizAction = {
   payload: Quiz[];
 };
 
+export type CurrentQuizAction = {
+  type: ActionTypes.SET_CURRENT_QUIZ,
+  payload: Quiz;
+}
+
 export type AppActions =
   | ParagraphsAction
   | PersonsAction
   | QuizAction
   | CurrentParagraphAction
-  | CurrentPersonAction;
+  | CurrentPersonAction
+  | CurrentQuizAction;
