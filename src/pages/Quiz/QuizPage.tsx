@@ -41,7 +41,9 @@ const QuizPage: FC = () => {
     const onAnswerClick = (answer: Answer) => {
         setIsButtonActive(true);
 
-        if (answer.isCorrectAnswer) {}
+        if (answer.isCorrectAnswer) {
+
+        }
     }
 
     return (
