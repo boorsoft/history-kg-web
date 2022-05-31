@@ -6,7 +6,7 @@ const QuizList: FC = (props) => {
     return <List {...props} >
         <Datagrid>
             <TextField source="id" />
-            <TextField source="text" />
+            <TextField source="title" />
             <EditButton resource="/quiz" />
             <DeleteButton resource="/quiz" />
         </Datagrid>

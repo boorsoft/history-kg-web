@@ -21,10 +21,13 @@ const CustomRichTextInput: FC<RichTextInputProps> = ({...props}: RichTextInputPr
     const editor = useTiptapEditor()
 
     const addImage = useCallback(() => {
+        if (!editor) return;
+
         const url = window.prompt('URL')
-    
+      
         if (url) {
-          editor.chain().focus().setImage({src: url}).run();  
+          console.log(editor)
+          editor && editor.chain().focus().setImage({src: url}).run();  
         }
 
     }, [])
@@ -47,10 +50,11 @@ const CustomRichTextInput: FC<RichTextInputProps> = ({...props}: RichTextInputPr
           <div onClick={addImage}>
               Image
           </div>
+          
         </RichTextInputToolbar>
       }
       {...props}
-    ></RichTextInput>
+    />
   );
 };
 
