@@ -32,7 +32,7 @@ const appReducer = (state: AppState = initialState, action: AppActions) => {
         case ActionTypes.SET_QUIZZES:
             return { ...state, quizzes: {...state.quizzes, data: action.payload, isLoading: false} };
         case ActionTypes.SET_CURRENT_QUIZ:
-            return { ...state, quizzes: {...state.quizzes, currentQuiz: action.payload, isLaoding: false} };
+            return { ...state, quizzes: {...state.quizzes, currentQuiz: action.payload, isLoading: false} };
         default:
             return {...state}
     }

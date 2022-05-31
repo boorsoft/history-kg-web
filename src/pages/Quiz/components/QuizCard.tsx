@@ -4,14 +4,18 @@ import styled from 'styled-components';
 import { RiListUnordered } from 'react-icons/ri';
 
 import { Quiz } from "../../../types/store/AppState";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
-    quiz: Quiz
+    quiz: Quiz;
+    route: string;
 }
 
-const QuizCard: FC<Props> = ({quiz}) => {
+const QuizCard: FC<Props> = ({quiz, route}) => {
+    const navigate = useNavigate();
+
     return (
-        <Container>
+        <Container onClick={() => navigate(route)}>
             <Column>
                 <Icon />
             </Column>
@@ -34,6 +38,7 @@ const Container = styled.div`
     border-radius: 18px;
     margin-bottom: 25px;
     padding: 30px 45px;
+    cursor: pointer;
 `
 
 const Column = styled.div`

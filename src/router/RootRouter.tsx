@@ -7,6 +7,7 @@ import Paragraph from "../pages/Paragraphs/components/Paragraph";
 import Paragraphs from "../pages/Paragraphs/Paragraphs";
 import PersonPage from "../pages/Persons/components/PersonPage";
 import Persons from "../pages/Persons/Persons";
+import QuizPage from "../pages/Quiz/QuizPage";
 import QuizMenu from "../pages/Quiz/QuizMenu";
 
 const RootRouter = () => {
@@ -21,6 +22,7 @@ const RootRouter = () => {
                     <Route path={ROUTES.QUIZ} element={<QuizMenu />} />
                     <Route path={`${ROUTES.PARAGRAPHS}/:id`} element={<Paragraph />} />
                     <Route path={`${ROUTES.PERSONS}/:id`} element={<PersonPage />} />
+                    <Route path={`${ROUTES.QUIZ}/:id`} element={<QuizPage />} />
                 </Routes>
             </BrowserRouter>
         </div>

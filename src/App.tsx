@@ -26,8 +26,11 @@ const GlobalStyles = createGlobalStyle`
   html {
     --primary-color: #f9f9ff;
     --accent-color: #5547f0;
+    --secondary-accent-color: #4644aa;
     --text-color: #28254A;
     --secondary-text-color: #706CA4;
+    --correct-color: #81FFC2;
+    --wrong-color: #FF7888;
   }
 `
 

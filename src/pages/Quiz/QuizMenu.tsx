@@ -3,6 +3,7 @@ import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import { ROUTES } from "../../constants/routes";
 import { fetchQuizzes } from "../../store/app/actionCreators";
 import { AppDispatch, RootState } from "../../store/store";
 import { Quiz } from "../../types/store/AppState";
@@ -22,7 +23,7 @@ const QuizMenu: FC = () => {
     return (<Container>
         {isLoading && <LoadingSpinner />}
         {!isLoading && quizzes.data.map((quiz: Quiz) => (
-            <QuizCard key={quiz.id} quiz={quiz} />
+            <QuizCard key={quiz.id} quiz={quiz} route={`${ROUTES.QUIZ}/${quiz.id}`} />
         ))}
     </Container>)
 }
