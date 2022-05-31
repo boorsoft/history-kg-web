@@ -5,11 +5,12 @@ import { BiRadioCircleMarked } from 'react-icons/bi';
 import { Answer } from "../../../types/store/AppState";
 
 type Props = {
-    answer: Answer
+    answer: Answer;
+    onClick: () => void;
 }
 
-const AnswerCard: FC<Props> = ({ answer }) => {
-    return (<Card>
+const AnswerCard: FC<Props> = ({ answer, onClick }) => {
+    return (<Card onClick={onClick}>
         <Icon />
         <Text>{answer.text}</Text>
     </Card>)

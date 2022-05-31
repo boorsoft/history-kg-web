@@ -5,16 +5,16 @@ import { Question } from "../../../types/store/AppState";
 
 type Props = {
     question: Question
-    questionsLength: number;
+    quizLengthText: string;
 }
 
-const QuestionCard: FC<Props> = ({question, questionsLength}) => {
+const QuestionCard: FC<Props> = ({question, quizLengthText}) => {
     return (
         <Container>        
             <Card>
                 <QuestionContainer>{question.text}</QuestionContainer>
             </Card>
-            <QuestionNumber>1/{questionsLength}</QuestionNumber>
+            <QuestionNumber>{quizLengthText}</QuestionNumber>
         </Container>
 
     )
