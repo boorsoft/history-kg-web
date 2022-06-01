@@ -13,9 +13,6 @@ type Props = {
 const AnswerCard: FC<Props> = ({ answer, onClick, disabled }) => {
   const [isClicked, setIsClicked] = useState(false);
 
-  useEffect(() => {
-  }, [disabled])
-
   return (
     <Card
       isClicked={isClicked}

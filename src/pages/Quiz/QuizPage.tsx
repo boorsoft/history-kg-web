@@ -31,12 +31,29 @@ const QuizPage: FC = () => {
   const [isButtonActive, setIsButtonActive] = useState(false);
   const [answersDisabled, setAnswersDisabled] = useState(false);
   const [quizFinished, setQuizFinished] = useState(false);
+  const [hasMultipleCorrectAnswers, setHasMultipleCorrectAnswers] = useState(false);
+  const [selectedAnswers, setSelectedAnswers] = useState<Answer[]>([])
 
   const fetchQuiz = bindActionCreators(fetchQuizById, dispatch);
 
   useEffect(() => {
+      setHasMultipleCorrectAnswers(checkIfHasMultipleCorrectAnswers());
+  }, [currentQuestionIdx])
+
+  useEffect(() => {
     id && fetchQuiz(+id);
   }, []);
+
+  const checkIfHasMultipleCorrectAnswers = () => {
+    let correctCount = 0;
+
+    questions && questions[currentQuestionIdx].answers.forEach((answer) => {
+        if (answer.isCorrectAnswer) correctCount = correctCount + 1;    
+    })
+
+    if (correctCount > 1) return true;
+    else return false;
+  }
 
   const nextQuestion = () => {
     if (questions && currentQuestionIdx >= questions.length - 1) return;
@@ -48,15 +65,21 @@ const QuizPage: FC = () => {
   const onAnswerClick = (answer: Answer) => {
     if (answersDisabled) return;
 
-    if (answer.isCorrectAnswer) setCorrectAnswersCount(count => count += 1)
+    if (answer.isCorrectAnswer) setCorrectAnswersCount((count) => (count += 1));
 
     setIsButtonActive(true);
-    setAnswersDisabled(true);
+
+    if (!hasMultipleCorrectAnswers) {
+        setAnswersDisabled(true);
+    } else {
+        selectedAnswers.push(answer);
+    }
+    
   };
 
   const finishQuiz = () => {
     setQuizFinished(true);
-  }
+  };
 
   return (
     <Container>
@@ -83,7 +106,12 @@ const QuizPage: FC = () => {
             ) : (
               <QuizButton text="Завершить" onClick={finishQuiz} />
             ))}
-            {quizFinished && <QuizFinishPopup  correctAnswersCount={correctAnswersCount} quizLength={questions.length} />}
+          {quizFinished && (
+            <QuizFinishPopup
+              correctAnswersCount={correctAnswersCount}
+              quizLength={questions.length}
+            />
+          )}
         </>
       )}
     </Container>
