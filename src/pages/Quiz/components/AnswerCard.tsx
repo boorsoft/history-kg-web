@@ -6,10 +6,11 @@ import { Answer } from "../../../types/store/AppState";
 
 type Props = {
   answer: Answer;
+  disabled: boolean;
   onClick: () => void;
 };
 
-const AnswerCard: FC<Props> = ({ answer, onClick }) => {
+const AnswerCard: FC<Props> = ({ answer, onClick, disabled }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   return (
@@ -17,6 +18,8 @@ const AnswerCard: FC<Props> = ({ answer, onClick }) => {
       isClicked={isClicked}
       isCorrect={answer.isCorrectAnswer}
       onClick={() => {
+        if (disabled) return;
+        
         setIsClicked(true);
         onClick();
       }}
@@ -35,8 +38,13 @@ const Card = styled.div<{ isCorrect: boolean; isClicked: boolean }>`
   height: 76px;
   padding: 25px;
   margin-bottom: 25px;
-  background-color: ${({ isCorrect, isClicked }) =>
-    isCorrect ? `var(--correct-color)` : `var(--wrong-color)`};
+  background-color: ${({ isCorrect, isClicked }) => {
+    if (isClicked) {
+      return isCorrect ? `var(--correct-color)` : `var(--wrong-color)`;
+    } else {
+      return `var(--primary-color)`;
+    }
+  }};
   box-shadow: 8px 4px 24px rgba(70, 68, 170, 0.1);
   border-radius: 18px;
   cursor: pointer;
