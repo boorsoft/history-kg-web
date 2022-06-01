@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FC } from "react";
 import styled from "styled-components";
 import { BiRadioCircleMarked } from "react-icons/bi";
@@ -13,13 +13,17 @@ type Props = {
 const AnswerCard: FC<Props> = ({ answer, onClick, disabled }) => {
   const [isClicked, setIsClicked] = useState(false);
 
+  useEffect(() => {
+  }, [disabled])
+
   return (
     <Card
       isClicked={isClicked}
       isCorrect={answer.isCorrectAnswer}
+      disabled={disabled}
       onClick={() => {
         if (disabled) return;
-        
+
         setIsClicked(true);
         onClick();
       }}
@@ -30,7 +34,7 @@ const AnswerCard: FC<Props> = ({ answer, onClick, disabled }) => {
   );
 };
 
-const Card = styled.div<{ isCorrect: boolean; isClicked: boolean }>`
+const Card = styled.div<{ isCorrect: boolean; isClicked: boolean, disabled: boolean }>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -38,9 +42,11 @@ const Card = styled.div<{ isCorrect: boolean; isClicked: boolean }>`
   height: 76px;
   padding: 25px;
   margin-bottom: 25px;
-  background-color: ${({ isCorrect, isClicked }) => {
+  background-color: ${({ isCorrect, isClicked, disabled }) => {
     if (isClicked) {
       return isCorrect ? `var(--correct-color)` : `var(--wrong-color)`;
+    } else if (disabled) {
+      return isCorrect && `var(--correct-color)`;
     } else {
       return `var(--primary-color)`;
     }
