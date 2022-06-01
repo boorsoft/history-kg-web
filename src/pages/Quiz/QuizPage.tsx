@@ -14,6 +14,7 @@ import { Container } from "../Home/Home";
 import AnswerCard from "./components/AnswerCard";
 import QuestionCard from "./components/QuestionCard";
 import QuizButton from "./components/QuizButton";
+import QuizFinishPopup from "./components/QuizFinishPopup";
 
 const QuizPage: FC = () => {
   const { id } = useParams();
@@ -25,9 +26,11 @@ const QuizPage: FC = () => {
   );
   const questions = currentQuiz?.questions;
 
+  const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
   const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0);
   const [isButtonActive, setIsButtonActive] = useState(false);
   const [answersDisabled, setAnswersDisabled] = useState(false);
+  const [quizFinished, setQuizFinished] = useState(false);
 
   const fetchQuiz = bindActionCreators(fetchQuizById, dispatch);
 
@@ -45,9 +48,15 @@ const QuizPage: FC = () => {
   const onAnswerClick = (answer: Answer) => {
     if (answersDisabled) return;
 
+    if (answer.isCorrectAnswer) setCorrectAnswersCount(count => count += 1)
+
     setIsButtonActive(true);
     setAnswersDisabled(true);
   };
+
+  const finishQuiz = () => {
+    setQuizFinished(true);
+  }
 
   return (
     <Container>
@@ -72,8 +81,9 @@ const QuizPage: FC = () => {
             (questions && currentQuestionIdx < questions.length - 1 ? (
               <QuizButton text="Дальше" onClick={nextQuestion} />
             ) : (
-              <QuizButton text="Завершить" onClick={nextQuestion} />
+              <QuizButton text="Завершить" onClick={finishQuiz} />
             ))}
+            {quizFinished && <QuizFinishPopup  correctAnswersCount={correctAnswersCount} quizLength={questions.length} />}
         </>
       )}
     </Container>
