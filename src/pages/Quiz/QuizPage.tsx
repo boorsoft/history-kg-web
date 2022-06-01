@@ -31,14 +31,16 @@ const QuizPage: FC = () => {
   const [isButtonActive, setIsButtonActive] = useState(false);
   const [answersDisabled, setAnswersDisabled] = useState(false);
   const [quizFinished, setQuizFinished] = useState(false);
-  const [hasMultipleCorrectAnswers, setHasMultipleCorrectAnswers] = useState(false);
-  const [selectedAnswers, setSelectedAnswers] = useState<Answer[]>([])
+  const [hasMultipleCorrectAnswers, setHasMultipleCorrectAnswers] =
+    useState(false);
+  const [selectedAnswers, setSelectedAnswers] = useState<Answer[]>([]);
+  const [confirmed, setConfirmed] = useState(false);
 
   const fetchQuiz = bindActionCreators(fetchQuizById, dispatch);
 
   useEffect(() => {
-      setHasMultipleCorrectAnswers(checkIfHasMultipleCorrectAnswers());
-  }, [currentQuestionIdx])
+    setHasMultipleCorrectAnswers(checkIfHasMultipleCorrectAnswers());
+  }, [currentQuestionIdx, isLoading]);
 
   useEffect(() => {
     id && fetchQuiz(+id);
@@ -47,12 +49,21 @@ const QuizPage: FC = () => {
   const checkIfHasMultipleCorrectAnswers = () => {
     let correctCount = 0;
 
-    questions && questions[currentQuestionIdx].answers.forEach((answer) => {
-        if (answer.isCorrectAnswer) correctCount = correctCount + 1;    
-    })
+    questions &&
+      questions[currentQuestionIdx].answers.forEach((answer) => {
+        if (answer.isCorrectAnswer) correctCount = correctCount + 1;
+      });
 
     if (correctCount > 1) return true;
     else return false;
+  };
+
+  const selectMultipleAnswers = (answer: Answer) => {
+    if (!selectedAnswers.includes(answer)) {
+      setSelectedAnswers((sa) => [...sa, answer])
+    } else {
+      selectedAnswers.splice(selectedAnswers.indexOf(answer), 1)
+    }
   }
 
   const nextQuestion = () => {
@@ -60,21 +71,35 @@ const QuizPage: FC = () => {
 
     setCurrentQuestionIdx((index) => (index += 1));
     setAnswersDisabled(false);
+    setIsButtonActive(false);
+    setConfirmed(false);
   };
+
+  const confirm = () => {
+    console.log(selectedAnswers);
+
+    let allCorrect = true;
+
+    selectedAnswers.forEach((sa) => {
+      if (!sa.isCorrectAnswer) allCorrect = false; 
+    })
+
+    if (allCorrect) setCorrectAnswersCount((count) => count += 1)
+
+    setConfirmed(true);
+  }
 
   const onAnswerClick = (answer: Answer) => {
     if (answersDisabled) return;
 
-    if (answer.isCorrectAnswer) setCorrectAnswersCount((count) => (count += 1));
-
     setIsButtonActive(true);
 
     if (!hasMultipleCorrectAnswers) {
-        setAnswersDisabled(true);
+      if (answer.isCorrectAnswer) setCorrectAnswersCount((count) => (count += 1));
+      setAnswersDisabled(true);
     } else {
-        selectedAnswers.push(answer);
+      selectMultipleAnswers(answer);
     }
-    
   };
 
   const finishQuiz = () => {
@@ -95,6 +120,8 @@ const QuizPage: FC = () => {
               <AnswerCard
                 key={answer.id}
                 answer={answer}
+                confirmed={confirmed}
+                hasMultipleCorrectAnswers={hasMultipleCorrectAnswers}
                 onClick={() => onAnswerClick(answer)}
                 disabled={answersDisabled}
               />
@@ -102,7 +129,11 @@ const QuizPage: FC = () => {
           </AnswersContainer>
           {isButtonActive &&
             (questions && currentQuestionIdx < questions.length - 1 ? (
-              <QuizButton text="Дальше" onClick={nextQuestion} />
+              confirmed ? (
+                <QuizButton text="Дальше" onClick={nextQuestion} />
+              ) : (
+                <QuizButton text="Подтвердить" onClick={confirm} />
+              )
             ) : (
               <QuizButton text="Завершить" onClick={finishQuiz} />
             ))}

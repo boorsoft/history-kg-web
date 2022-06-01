@@ -7,21 +7,34 @@ import { Answer } from "../../../types/store/AppState";
 type Props = {
   answer: Answer;
   disabled: boolean;
+  confirmed: boolean;
+  hasMultipleCorrectAnswers: boolean;
   onClick: () => void;
 };
 
-const AnswerCard: FC<Props> = ({ answer, onClick, disabled }) => {
+const AnswerCard: FC<Props> = ({
+  answer,
+  onClick,
+  disabled,
+  confirmed,
+  hasMultipleCorrectAnswers,
+}) => {
   const [isClicked, setIsClicked] = useState(false);
+  const [selected, setSelected] = useState(false);
 
   return (
     <Card
       isClicked={isClicked}
       isCorrect={answer.isCorrectAnswer}
+      hasMultipleCorrectAnswers={hasMultipleCorrectAnswers}
       disabled={disabled}
+      selected={selected}
+      confirmed={confirmed}
       onClick={() => {
         if (disabled) return;
 
         setIsClicked(true);
+        setSelected(!selected);
         onClick();
       }}
     >
@@ -31,7 +44,14 @@ const AnswerCard: FC<Props> = ({ answer, onClick, disabled }) => {
   );
 };
 
-const Card = styled.div<{ isCorrect: boolean; isClicked: boolean, disabled: boolean }>`
+const Card = styled.div<{
+  isCorrect: boolean;
+  isClicked: boolean;
+  disabled: boolean;
+  hasMultipleCorrectAnswers: boolean;
+  selected: boolean;
+  confirmed: boolean;
+}>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -39,15 +59,36 @@ const Card = styled.div<{ isCorrect: boolean; isClicked: boolean, disabled: bool
   height: 76px;
   padding: 25px;
   margin-bottom: 25px;
-  background-color: ${({ isCorrect, isClicked, disabled }) => {
-    if (isClicked) {
-      return isCorrect ? `var(--correct-color)` : `var(--wrong-color)`;
-    } else if (disabled) {
-      return isCorrect && `var(--correct-color)`;
+  background-color: ${({
+    isCorrect,
+    isClicked,
+    disabled,
+    confirmed,
+    hasMultipleCorrectAnswers,
+  }) => {
+    if (!hasMultipleCorrectAnswers) {
+      if (isClicked) {
+        return isCorrect ? `var(--correct-color)` : `var(--wrong-color)`;
+      } else if (disabled) {
+        return isCorrect && `var(--correct-color)`;
+      } else {
+        return `var(--primary-color)`;
+      }
     } else {
-      return `var(--primary-color)`;
+      if (confirmed) {
+        return isCorrect ? `var(--correct-color)` : `var(--wrong-color)`;
+      } 
     }
   }};
+  border-width: 1px;
+  border-color: var(--accent-color);
+  border-style: ${({isClicked, hasMultipleCorrectAnswers, selected}) => {
+    if (hasMultipleCorrectAnswers) {
+      if (isClicked) {
+        return selected ? 'solid' : '';
+      }
+    }
+}};
   box-shadow: 8px 4px 24px rgba(70, 68, 170, 0.1);
   border-radius: 18px;
   cursor: pointer;
