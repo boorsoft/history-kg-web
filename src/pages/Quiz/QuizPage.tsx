@@ -39,12 +39,9 @@ const QuizPage: FC = () => {
   const fetchQuiz = bindActionCreators(fetchQuizById, dispatch);
 
   useEffect(() => {
-    setHasMultipleCorrectAnswers(checkIfHasMultipleCorrectAnswers());
-  }, [currentQuestionIdx, isLoading]);
-
-  useEffect(() => {
     id && fetchQuiz(+id);
-  }, []);
+    setHasMultipleCorrectAnswers(checkIfHasMultipleCorrectAnswers());
+  }, [isLoading]);
 
   const checkIfHasMultipleCorrectAnswers = () => {
     let correctCount = 0;
@@ -60,34 +57,35 @@ const QuizPage: FC = () => {
 
   const selectMultipleAnswers = (answer: Answer) => {
     if (!selectedAnswers.includes(answer)) {
-      setSelectedAnswers((sa) => [...sa, answer])
+      setSelectedAnswers((sa) => [...sa, answer]);
     } else {
-      selectedAnswers.splice(selectedAnswers.indexOf(answer), 1)
+      selectedAnswers.splice(selectedAnswers.indexOf(answer), 1);
     }
-  }
+  };
 
   const nextQuestion = () => {
     if (questions && currentQuestionIdx >= questions.length - 1) return;
 
     setCurrentQuestionIdx((index) => (index += 1));
+    setHasMultipleCorrectAnswers(checkIfHasMultipleCorrectAnswers());
     setAnswersDisabled(false);
     setIsButtonActive(false);
     setConfirmed(false);
+    setSelectedAnswers([]);
   };
 
   const confirm = () => {
-    console.log(selectedAnswers);
-
     let allCorrect = true;
 
     selectedAnswers.forEach((sa) => {
-      if (!sa.isCorrectAnswer) allCorrect = false; 
-    })
+      if (!sa.isCorrectAnswer) allCorrect = false;
+    });
 
-    if (allCorrect) setCorrectAnswersCount((count) => count += 1)
+    if (allCorrect) setCorrectAnswersCount((count) => (count += 1));
 
     setConfirmed(true);
-  }
+    setAnswersDisabled(true);
+  };
 
   const onAnswerClick = (answer: Answer) => {
     if (answersDisabled) return;
@@ -95,8 +93,10 @@ const QuizPage: FC = () => {
     setIsButtonActive(true);
 
     if (!hasMultipleCorrectAnswers) {
-      if (answer.isCorrectAnswer) setCorrectAnswersCount((count) => (count += 1));
+      if (answer.isCorrectAnswer)
+        setCorrectAnswersCount((count) => (count += 1));
       setAnswersDisabled(true);
+      setConfirmed(true);
     } else {
       selectMultipleAnswers(answer);
     }
@@ -134,8 +134,10 @@ const QuizPage: FC = () => {
               ) : (
                 <QuizButton text="Подтвердить" onClick={confirm} />
               )
-            ) : (
+            ) : confirmed ? (
               <QuizButton text="Завершить" onClick={finishQuiz} />
+            ) : (
+              <QuizButton text="Подтвердить" onClick={confirm} />
             ))}
           {quizFinished && (
             <QuizFinishPopup

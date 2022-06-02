@@ -22,6 +22,10 @@ const AnswerCard: FC<Props> = ({
   const [isClicked, setIsClicked] = useState(false);
   const [selected, setSelected] = useState(false);
 
+  useEffect(() => {
+    setSelected(false);
+  }, [])
+
   return (
     <Card
       isClicked={isClicked}
@@ -64,6 +68,7 @@ const Card = styled.div<{
     isClicked,
     disabled,
     confirmed,
+    selected,
     hasMultipleCorrectAnswers,
   }) => {
     if (!hasMultipleCorrectAnswers) {
@@ -76,7 +81,8 @@ const Card = styled.div<{
       }
     } else {
       if (confirmed) {
-        return isCorrect ? `var(--correct-color)` : `var(--wrong-color)`;
+        if (selected) return isCorrect ? `var(--correct-color)` : `var(--wrong-color)`;
+        
       } 
     }
   }};
@@ -86,7 +92,7 @@ const Card = styled.div<{
     if (hasMultipleCorrectAnswers) {
       if (isClicked) {
         return selected ? 'solid' : '';
-      }
+      } 
     }
 }};
   box-shadow: 8px 4px 24px rgba(70, 68, 170, 0.1);
