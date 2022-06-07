@@ -81,8 +81,11 @@ const Card = styled.div<{
       }
     } else {
       if (confirmed) {
-        if (selected) return isCorrect ? `var(--correct-color)` : `var(--wrong-color)`;
-        
+        if (selected) {
+          return isCorrect ? `var(--correct-color)` : `var(--wrong-color)`;
+        } else {
+          return isCorrect ? `var(--secondary-correct-color)` : `var(--primary-color)`;
+        }
       } 
     }
   }};

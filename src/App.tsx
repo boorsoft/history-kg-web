@@ -30,6 +30,7 @@ const GlobalStyles = createGlobalStyle`
     --text-color: #28254A;
     --secondary-text-color: #706CA4;
     --correct-color: #81FFC2;
+    --secondary-correct-color: #b2d6e0;
     --wrong-color: #FF7888;
   }
 `
