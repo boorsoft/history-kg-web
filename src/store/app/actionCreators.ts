@@ -5,7 +5,7 @@ import { API_PARAGRAPHS_URL, API_PERSONS_URL, API_QUIZ_URL } from "../../constan
 import { ActionTypes, AppActions } from "./actionTypes";
 
 export const fetchParagraphs = () => {
-    return (dispatch: Dispatch<AppActions>) => {
+    return async (dispatch: Dispatch<AppActions>) => {
         return axios.get(API_PARAGRAPHS_URL).then(({data}) => {
             return dispatch({
                 type: ActionTypes.SET_PARAGRAPHS,
@@ -15,8 +15,8 @@ export const fetchParagraphs = () => {
     }
 }
 
-export const fetchParagraphById = (id: number) => {
-    return (dispatch: Dispatch<AppActions>) => {
+export const  fetchParagraphById = (id: number) => {
+    return async (dispatch: Dispatch<AppActions>) => {
         return axios.get(`${API_PARAGRAPHS_URL}/${id}`).then(({data}) => {
             return dispatch({
                 type: ActionTypes.SET_CURRENT_PARAGRAPH,
@@ -27,7 +27,7 @@ export const fetchParagraphById = (id: number) => {
 }
 
 export const fetchPersons = () => {
-    return (dispatch: Dispatch<AppActions>) => {
+    return async (dispatch: Dispatch<AppActions>) => {
         return axios.get(API_PERSONS_URL).then(({data}) => {
             return dispatch({
                 type: ActionTypes.SET_PERSONS,
@@ -38,7 +38,7 @@ export const fetchPersons = () => {
 }
 
 export const fetchPersonById = (id: number) => {
-    return (dispatch: Dispatch<AppActions>) => {
+    return async (dispatch: Dispatch<AppActions>) => {
         return axios.get(`${API_PERSONS_URL}/${id}`).then(({data}) => {
             return dispatch({
                 type: ActionTypes.SET_CURRENT_PERSON,
@@ -49,7 +49,7 @@ export const fetchPersonById = (id: number) => {
 }
 
 export const fetchQuizzes = () => {
-    return (dispatch: Dispatch<AppActions>) => {
+    return async (dispatch: Dispatch<AppActions>) => {
         return axios.get(API_QUIZ_URL).then(({data}) => {
             return dispatch({
                 type: ActionTypes.SET_QUIZZES,
@@ -60,7 +60,7 @@ export const fetchQuizzes = () => {
 }
 
 export const fetchQuizById = (id: number) => {
-    return (dispatch: Dispatch<AppActions>) => {
+    return async (dispatch: Dispatch<AppActions>) => {
         return axios.get(`${API_QUIZ_URL}/${id}`).then(({data}) => {
             return dispatch({
                 type: ActionTypes.SET_CURRENT_QUIZ,

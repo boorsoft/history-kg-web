@@ -41,7 +41,7 @@ const QuizPage: FC = () => {
   useEffect(() => {
     id && fetchQuiz(+id);
     setHasMultipleCorrectAnswers(checkIfHasMultipleCorrectAnswers());
-  }, [isLoading]);
+  }, [questions]);
 
   const checkIfHasMultipleCorrectAnswers = () => {
     let correctCount = 0;
