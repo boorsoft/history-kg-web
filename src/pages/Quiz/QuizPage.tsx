@@ -40,6 +40,9 @@ const QuizPage: FC = () => {
 
   useEffect(() => {
     id && fetchQuiz(+id);
+  }, [])
+
+  useEffect(() => {
     setHasMultipleCorrectAnswers(checkIfHasMultipleCorrectAnswers());
   }, [questions]);
 
