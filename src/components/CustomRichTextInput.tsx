@@ -26,7 +26,6 @@ const CustomRichTextInput: FC<RichTextInputProps> = ({...props}: RichTextInputPr
         const url = window.prompt('URL')
       
         if (url) {
-          console.log(editor)
           editor && editor.chain().focus().setImage({src: url}).run();  
         }
 
@@ -47,9 +46,6 @@ const CustomRichTextInput: FC<RichTextInputProps> = ({...props}: RichTextInputPr
           <LinkButtons />
           <QuoteButtons />
           <ClearButtons />
-          <div onClick={addImage}>
-              Image
-          </div>
           
         </RichTextInputToolbar>
       }

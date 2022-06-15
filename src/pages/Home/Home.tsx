@@ -12,7 +12,7 @@ import Header from "../../components/Header";
 const Home = () => {
   return (
     <>
-      <Header title="История кыргызстана" />
+      <Header title="История кыргызстана" isHome />
       <Container>
         <MenuButton route={ROUTES.PARAGRAPHS} title="Параграфы" image={HomePic1} />
         <MenuButton route={ROUTES.PERSONS} title="Личности" image={HomePic2} />
@@ -29,10 +29,10 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   width: 100%;
-  min-height: 85vh;
+  min-height: 100vh;
   padding: 20px;
+  padding-top: 150px;
 `;
 
 export default Home;
