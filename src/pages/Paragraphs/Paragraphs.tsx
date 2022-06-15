@@ -9,6 +9,7 @@ import * as appActions from '../../store/app/actionCreators';
 import ParagraphSelector from "./components/ParagraphSelector";;
 import { ROUTES } from '../../constants/routes';
 import LoadingSpinner from "../../components/LoadingSpinner";
+import Header from "../../components/Header";
 
 const Paragraphs: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -22,12 +23,15 @@ const Paragraphs: FC = () => {
   }, []);
 
   return (
+    <>
+    <Header title="Параграфы" />
     <Container>
       {isLoading && <LoadingSpinner />}
       {!isLoading && paragraphs.data.map((paragraph: Paragraph) => (
         <ParagraphSelector key={paragraph.id} paragraph={paragraph} route={`${ROUTES.PARAGRAPHS}/${paragraph.id}`} />
       ))}
     </Container>
+    </>
   );
 };
 

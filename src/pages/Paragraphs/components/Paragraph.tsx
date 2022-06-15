@@ -10,6 +10,7 @@ import { fetchParagraphById } from "../../../store/app/actionCreators";
 
 import { AppDispatch, RootState } from "../../../store/store";
 import LoadingSpinner from "../../../components/LoadingSpinner";
+import Header from "../../../components/Header";
 
 const Paragraph: FC = () => {
     const { id } = useParams();
@@ -26,6 +27,7 @@ const Paragraph: FC = () => {
 
     return (
         <Wrapper>
+            <Header title={currentParagraph?.title || ''} />
             <Container>
                 {isLoading && <LoadingSpinner />}
                 <Text>

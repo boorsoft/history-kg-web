@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import RootRouter from "./router/RootRouter";
 
-import './index.css';
+import "./index.css";
 import { createGlobalStyle } from "styled-components";
 import Header from "./components/Header";
 import Wrapper from "./components/Wrapper";
@@ -9,14 +9,13 @@ import { Provider } from "react-redux";
 import store from "./store/store";
 
 const App = () => {
-
   return (
     <Provider store={store}>
       <div className="App">
-          <Wrapper>
-            <GlobalStyles />
-            <RootRouter />
-          </Wrapper>
+        <Wrapper>
+          <GlobalStyles />
+          <RootRouter />
+        </Wrapper>
       </div>
     </Provider>
   );
@@ -33,6 +32,6 @@ const GlobalStyles = createGlobalStyle`
     --secondary-correct-color: #b2d6e0;
     --wrong-color: #FF7888;
   }
-`
+`;
 
 export default App;

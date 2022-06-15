@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
+import Header from "../../components/Header";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import { ROUTES } from "../../constants/routes";
 import { fetchQuizzes } from "../../store/app/actionCreators";
@@ -11,21 +12,34 @@ import { Container } from "../Home/Home";
 import QuizCard from "./components/QuizCard";
 
 const QuizMenu: FC = () => {
-    const dispatch = useDispatch<AppDispatch>();
-    const { quizzes, quizzes: { isLoading } } = useSelector((state: RootState) => state.app)
+  const dispatch = useDispatch<AppDispatch>();
+  const {
+    quizzes,
+    quizzes: { isLoading },
+  } = useSelector((state: RootState) => state.app);
 
-    const getQuizzes = bindActionCreators(fetchQuizzes, dispatch);
+  const getQuizzes = bindActionCreators(fetchQuizzes, dispatch);
 
-    useEffect(() => {
-        getQuizzes();
-    }, [])
+  useEffect(() => {
+    getQuizzes();
+  }, []);
 
-    return (<Container>
+  return (
+    <>
+      <Header title="Тестирование" />
+      <Container>
         {isLoading && <LoadingSpinner />}
-        {!isLoading && quizzes.data.map((quiz: Quiz) => (
-            <QuizCard key={quiz.id} quiz={quiz} route={`${ROUTES.QUIZ}/${quiz.id}`} />
-        ))}
-    </Container>)
-}
+        {!isLoading &&
+          quizzes.data.map((quiz: Quiz) => (
+            <QuizCard
+              key={quiz.id}
+              quiz={quiz}
+              route={`${ROUTES.QUIZ}/${quiz.id}`}
+            />
+          ))}
+      </Container>
+    </>
+  );
+};
 
 export default QuizMenu;

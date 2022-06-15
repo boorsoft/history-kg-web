@@ -3,6 +3,7 @@ import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import styled from 'styled-components';
+import Header from "../../components/Header";
 
 import LoadingSpinner from "../../components/LoadingSpinner";
 import { ROUTES } from "../../constants/routes";
@@ -26,6 +27,8 @@ export const Persons: FC = () => {
     }, [])
 
     return (
+        <>
+        <Header title="Исторические личности" />
         <Container>
             {isLoading && <LoadingSpinner />}
             <GridContainer>
@@ -34,6 +37,7 @@ export const Persons: FC = () => {
                 ))}
             </GridContainer>
         </Container>
+        </>
     )
 }
 

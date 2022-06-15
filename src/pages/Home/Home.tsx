@@ -7,15 +7,20 @@ import HomePic2 from "../../assets/images/home/home-pic2.jpg";
 import HomePic3 from "../../assets/images/home/home-pic3.jpg";
 import HomePic4 from "../../assets/images/home/home-pic4.jpg";
 import { ROUTES } from "../../constants/routes";
+import Header from "../../components/Header";
 
 const Home = () => {
   return (
-    <Container>
-      <MenuButton route={ROUTES.PARAGRAPHS} title="Параграфы" image={HomePic1} />
-      <MenuButton route={ROUTES.PERSONS} title="Личности" image={HomePic2} />
-      <MenuButton route={ROUTES.QUIZ} title="Тестирование" image={HomePic3} />
-      <MenuButton route={ROUTES.ABOUT} title="О приложении" image={HomePic4} />
-    </Container>
+    <>
+      <Header title="История кыргызстана" />
+      <Container>
+        <MenuButton route={ROUTES.PARAGRAPHS} title="Параграфы" image={HomePic1} />
+        <MenuButton route={ROUTES.PERSONS} title="Личности" image={HomePic2} />
+        <MenuButton route={ROUTES.QUIZ} title="Тестирование" image={HomePic3} />
+        <MenuButton route={ROUTES.ABOUT} title="О приложении" image={HomePic4} />
+      </Container>
+    </>
+    
   );
 };
 

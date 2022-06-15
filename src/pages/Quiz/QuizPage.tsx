@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import styled from "styled-components";
+import Header from "../../components/Header";
 
 import LoadingSpinner from "../../components/LoadingSpinner";
 import { fetchQuizById } from "../../store/app/actionCreators";
@@ -110,6 +111,8 @@ const QuizPage: FC = () => {
   };
 
   return (
+    <>
+    <Header title="Тестирование" />
     <Container>
       {isLoading && <LoadingSpinner />}
       {!isLoading && currentQuiz && questions && (
@@ -151,7 +154,7 @@ const QuizPage: FC = () => {
         </>
       )}
     </Container>
-  );
+    </>);
 };
 
 const AnswersContainer = styled.div`

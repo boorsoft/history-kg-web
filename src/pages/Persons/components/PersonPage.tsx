@@ -9,6 +9,7 @@ import { bindActionCreators } from "redux";
 
 import { fetchPersonById } from '../../../store/app/actionCreators';
 import LoadingSpinner from "../../../components/LoadingSpinner";
+import Header from "../../../components/Header";
 
 const PersonPage: FC = () => {
     const { id } = useParams()
@@ -24,6 +25,7 @@ const PersonPage: FC = () => {
 
     return (
         <Wrapper>
+            <Header title={currentPerson?.firstName + ' ' + currentPerson?.lastName} />
             <Container>
                 {isLoading && <LoadingSpinner />}
                 <Text>
