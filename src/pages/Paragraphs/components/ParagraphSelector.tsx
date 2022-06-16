@@ -37,10 +37,12 @@ const Image = styled.div<{image: string}>`
 `
 
 const TitleContainer = styled.div`
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     position: relative;
     z-index: 1;
-    display: grid;
-    place-content: center;
+    padding: 8px 15px;
     background-color: var(--accent-color);
     color: var(--primary-color);
     width: clamp(150px, 50vw, 220px);
@@ -49,9 +51,6 @@ const TitleContainer = styled.div`
     border-radius: 18px;
     bottom: 85px;
     left: -30px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 `
 
 export default ParagraphSelector;

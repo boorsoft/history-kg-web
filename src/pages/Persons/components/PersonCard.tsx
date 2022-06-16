@@ -31,7 +31,8 @@ const Image = styled.div<{image: string}>`
     height: 215px;
     background: ${({image}) => `url(${image})` };
     background-position: center;
-    background-size: 105%;
+    background-repeat: no-repeat;
+    background-size: 120%;
     filter: drop-shadow(4px 4px 17px rgba(70, 68, 170, 0.2));
     border-radius: 22px 22px 10px 10px;
 `
