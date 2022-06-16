@@ -13,10 +13,9 @@ const ParagraphsList: FC = (props) => {
       <Datagrid>
           <TextField source="id" />
           <TextField source="title" />
-          <TextField source="text" />
           <TextField source="image" />
           <EditButton resource="/paragraphs" />
-          <DeleteButton resource="/paragraphs" />
+          <DeleteButton resource="paragraphs" />
       </Datagrid>
   </List>;
 };

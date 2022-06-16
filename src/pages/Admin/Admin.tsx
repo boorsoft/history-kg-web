@@ -22,6 +22,7 @@ const httpClient = (url: string, options: Options = {}) => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     });
   }
+
   return fetchUtils.fetchJson(url, options);
 };
 

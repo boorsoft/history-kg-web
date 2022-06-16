@@ -8,7 +8,7 @@ const QuizList: FC = (props) => {
             <TextField source="id" />
             <TextField source="title" />
             <EditButton resource="/quiz" />
-            <DeleteButton resource="/quiz" />
+            <DeleteButton resource="quiz" />
         </Datagrid>
     </List>
 }

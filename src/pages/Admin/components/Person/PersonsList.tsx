@@ -14,10 +14,9 @@ const PersonsList: FC = (props) => {
           <TextField source="id" />
           <TextField source="firstName" />
           <TextField source="lastName" />
-          <TextField source="bio" />
           <TextField source="image" />
           <EditButton resource="/persons" />
-          <DeleteButton resource="/persons" />
+          <DeleteButton resource="persons" />
       </Datagrid>
   </List>;
 };

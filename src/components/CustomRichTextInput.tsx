@@ -17,8 +17,7 @@ import {
 import Image from "@tiptap/extension-image";
 
 const CustomRichTextInput: FC<RichTextInputProps> = ({...props}: RichTextInputProps) => {
-
-    const editor = useTiptapEditor()
+    const editor = useTiptapEditor();
 
     const addImage = useCallback(() => {
         if (!editor) return;
@@ -46,7 +45,7 @@ const CustomRichTextInput: FC<RichTextInputProps> = ({...props}: RichTextInputPr
           <LinkButtons />
           <QuoteButtons />
           <ClearButtons />
-          
+          <div onClick={addImage}>Image</div>
         </RichTextInputToolbar>
       }
       {...props}

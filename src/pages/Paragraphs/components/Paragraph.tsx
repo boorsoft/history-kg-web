@@ -44,6 +44,7 @@ const Wrapper = styled.div`
 `
 
 const Container = styled.div`
+    margin-top: 120px;
     padding: 10px;
     width: clamp(350px, 40vw, 500px);
 `
