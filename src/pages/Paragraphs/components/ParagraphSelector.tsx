@@ -27,8 +27,8 @@ const Container = styled.div`
 
 const Image = styled.div<{image: string}>`
     position: relative;
-    width: clamp(300px, 40vw, 440px);
-    height: clamp(50px, 40vw, 120px);
+    width: clamp(300px, 80vw, 440px);
+    height: clamp(50px, 80vw, 120px);
     background-image: ${({image}) => `url(${image})`};
     background-position: center 100%;
     background-size: 100%;
@@ -45,11 +45,11 @@ const TitleContainer = styled.div`
     padding: 8px 15px;
     background-color: var(--accent-color);
     color: var(--primary-color);
-    width: clamp(150px, 50vw, 220px);
+    width: clamp(180px, 50vw, 220px);
     height: clamp(26px, 30vw, 36px);
     box-shadow: 0px 4px 24px rgba(51, 51, 51, 0.25);
     border-radius: 18px;
-    bottom: 85px;
+    bottom: 75px;
     left: -30px;
 `
 

@@ -1,9 +1,8 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import RootRouter from "./router/RootRouter";
-
 import "./index.css";
+
 import { createGlobalStyle } from "styled-components";
-import Header from "./components/Header";
 import Wrapper from "./components/Wrapper";
 import { Provider } from "react-redux";
 import store from "./store/store";

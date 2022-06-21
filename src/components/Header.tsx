@@ -24,7 +24,7 @@ const StyledHeader = styled.div`
   position: fixed;
   z-index: 100;
   width: 100%;
-  height: 120px;
+  height: 90px;
   background-color: var(--primary-color);
 `;
 

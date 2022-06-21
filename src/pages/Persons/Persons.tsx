@@ -44,7 +44,7 @@ export const Persons: FC = () => {
 const GridContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    gap: clamp(15px, 5vw, 40px);
 `
 
 export default Persons;

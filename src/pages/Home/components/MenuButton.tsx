@@ -25,13 +25,13 @@ const ButtonContainer = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   cursor: pointer;
 `;
 
 const Image = styled.div<{ image: string }>`
   position: relative;
-  width: clamp(340px, 50vw, 450px);
+  width: clamp(330px, 90vw, 450px);
   height: clamp(140px, 35vw, 180px);
   background-image: ${({ image }) => `url(${image})`};
   background-position: 100% 90%;

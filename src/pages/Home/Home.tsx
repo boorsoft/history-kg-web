@@ -31,8 +31,8 @@ export const Container = styled.div`
   align-items: center;
   width: 100%;
   min-height: 100vh;
-  padding: 20px;
-  padding-top: 150px;
+  /* padding: 20px; */
+  padding-top: 120px;
 `;
 
 export default Home;
