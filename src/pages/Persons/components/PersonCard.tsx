@@ -29,7 +29,8 @@ const Image = styled.div<{image: string}>`
     position: relative;
     width: 140px;
     height: 215px;
-    background: ${({image}) => `url(${image})` };
+    background-color: var(--primary-color);
+    background-image: ${({image}) => `url(${image})` };
     background-position: center;
     background-repeat: no-repeat;
     background-size: 120%;

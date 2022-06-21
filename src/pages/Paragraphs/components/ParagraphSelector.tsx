@@ -29,6 +29,7 @@ const Image = styled.div<{image: string}>`
     position: relative;
     width: clamp(300px, 80vw, 440px);
     height: clamp(50px, 80vw, 120px);
+    background-color: var(--primary-color);
     background-image: ${({image}) => `url(${image})`};
     background-position: center 100%;
     background-size: 100%;
