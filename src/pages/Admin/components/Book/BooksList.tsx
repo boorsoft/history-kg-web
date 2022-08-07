@@ -8,16 +8,16 @@ import {
   DeleteButton,
 } from "react-admin";
 
-const ParagraphsList: FC = (props) => {
+const BooksList: FC = (props) => {
   return <List {...props}>
       <Datagrid>
           <TextField source="id" />
           <TextField source="title" />
-          <TextField source="image" />
-          <EditButton resource="/paragraphs" />
-          <DeleteButton resource="paragraphs" />
+          <TextField source="fileName" />
+          <EditButton resource="/books" />
+          <DeleteButton resource="books" />
       </Datagrid>
   </List>;
 };
 
-export default ParagraphsList;
+export default BooksList;
