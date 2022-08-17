@@ -22,11 +22,13 @@ const App = () => {
 
 const GlobalStyles = createGlobalStyle`
   html {
-    --primary-color: #f9f9ff;
-    --accent-color: #5547f0;
-    --secondary-accent-color: #4644aa;
-    --text-color: #28254A;
-    --secondary-text-color: #706CA4;
+    --primary-color: #F9F7F6;
+    --secondary-color: #FFFEFD;
+    --accent-color: #FFD367;
+    --secondary-accent-color: #FCE4A9;
+    --text-color: #4A443B;
+    --secondary-text-color: #8F8A82;
+    --heading-text-color: #FFFFFF;
     --correct-color: #81FFC2;
     --secondary-correct-color: #b2d6e0;
     --wrong-color: #FF7888;
