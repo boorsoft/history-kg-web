@@ -7,14 +7,14 @@ import { Person } from '../../../types/store/AppState';
 
 type Props = {
     person: Person
-    route: string;
+    route?: string;
 }
 
 const PersonCard: FC<Props> = ({person, route}) => {
     const navigate = useNavigate();
 
     return (
-        <Container onClick={() => navigate(route)}>
+        <Container onClick={() => navigate(route!)}>
             <Image image={person.image} />
             <NameContainer>{`${person.firstName} ${person.lastName}`}</NameContainer>
         </Container>
