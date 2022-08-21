@@ -49,8 +49,15 @@ const AdminPage = () => {
             }),
         create: (resource, params) => {
 
-            if (resource !== "books" || !params.data.file) {                
-                return dataProvider.create(resource, params);
+            if (resource !== "books" || !params.data.file) {             
+                return axios({
+                    method: 'POST',
+                    data: params.data,
+                    url: `${API_URL}/${resource}`,
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
             }
             
             let formData = new FormData();
