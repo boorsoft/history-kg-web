@@ -23,36 +23,38 @@ const PersonCard: FC<Props> = ({person, route}) => {
 
 const Container = styled.div`
     cursor: pointer;
+    margin-right: 15px;
+    height: 220px;
 `
 
 const Image = styled.div<{image: string}>`
     position: relative;
-    width: 140px;
-    height: 215px;
+    width: 160px;
+    height: 230px;
     background-color: var(--primary-color);
     background-image: ${({image}) => `url(${image})` };
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 120%;
+    background-size: 130%;
     filter: drop-shadow(4px 4px 17px rgba(70, 68, 170, 0.2));
-    border-radius: 22px 22px 10px 10px;
+    border-radius: 15px;
 `
 
 const NameContainer = styled.div`
     position: relative;
     z-index: 1;
-    bottom: 45px;
-    left: -10px;
+    bottom: 53px;
     display: grid;
     place-content: center;
-    background-color: var(--accent-color);
-    width: 160px;
-    height: 30px;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 16px;
-    color: var(--primary-color);
+    background: rgba(43, 41, 41, 0.5);
+    backdrop-filter: blur(8px);
+    width: 100%;
+    height: 53px;
+    border-radius: 0 0 15px 15px;
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--heading-text-color);
+    font-weight: 600;
 `
 
 export default PersonCard;
