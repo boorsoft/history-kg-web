@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
-import { MdArrowForwardIos } from 'react-icons/md';
+import { MdArrowForwardIos } from "react-icons/md";
 import styled from "styled-components";
 
 import { ROUTES } from "../../../constants/routes";
-import { fetchPersons } from "../../../store/app/actionCreators";
+import { fetchPersons, fetchQuizzes } from "../../../store/app/actionCreators";
 import { AppDispatch, RootState } from "../../../store/store";
-import { Person } from "../../../types/store/AppState";
+import { Person, Quiz } from "../../../types/store/AppState";
 
 import PersonCard from "../../Persons/components/PersonCard";
 import BookCard from "./BookCard";
+import QuizCard from "../../Quiz/components/QuizCard";
 
 type Props = {
   title: string;
@@ -22,15 +23,17 @@ type Props = {
 const SectionContent = ({ scroll, type }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const {
-    persons,
-    persons: { isLoading },
-  } = useSelector((state: RootState) => state.app);
+  const { persons } = useSelector((state: RootState) => state.app);
+
+  const { quizzes } = useSelector((state: RootState) => state.app);
+
+  const getQuizzes = bindActionCreators(fetchQuizzes, dispatch);
 
   const getPersons = bindActionCreators(fetchPersons, dispatch);
 
   useEffect(() => {
     if (type === "persons") getPersons();
+    else if (type === "quiz") getQuizzes();
   }, []);
 
   if (type === "books") {
@@ -44,12 +47,25 @@ const SectionContent = ({ scroll, type }: Props) => {
   } else if (type === "persons") {
     return (
       <ScrollContainer scroll={scroll}>
-        {!isLoading &&
+        {!persons.isLoading &&
           persons.data.map((person: Person) => (
             <PersonCard
               key={person.id}
               person={person}
               route={`${ROUTES.PERSONS}/${person.id}`}
+            />
+          ))}
+      </ScrollContainer>
+    );
+  } else if (type === "quiz") {
+    return (
+      <ScrollContainer scroll={scroll}>
+        {!quizzes.isLoading &&
+          quizzes.data.map((quiz: Quiz) => (
+            <QuizCard
+              key={quiz.id}
+              quiz={quiz}
+              route={`${ROUTES.QUIZ}/${quiz.id}`}
             />
           ))}
       </ScrollContainer>
@@ -110,11 +126,12 @@ const ViewAllButtonText = styled.h4`
 const ViewAllButtonIcon = styled(MdArrowForwardIos)`
   color: var(--text-color);
   margin-left: 6px;
-`
+`;
 
 const ScrollContainer = styled.div<{ scroll: string }>`
   width: 100%;
   display: flex;
+  flex-direction: ${({scroll}) => scroll === 'vertical' ? 'column' : 'row'};
   overflow-x: ${({ scroll }) => scroll === "horizontal" && "scroll"};
   overflow-y: ${({ scroll }) => scroll === "vertical" && "scroll"};
   padding: 15px 0;

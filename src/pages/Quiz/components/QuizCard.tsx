@@ -48,7 +48,7 @@ const Column = styled.div`
 
 const Icon = styled(RiListUnordered)`
     font-size: 45px;
-    color: var(--accent-color);
+    color: var(--text-color);
     margin-right: 15px;
 `
 

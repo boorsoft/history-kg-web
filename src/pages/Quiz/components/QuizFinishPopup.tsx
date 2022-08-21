@@ -17,7 +17,7 @@ const QuizFinishPopup: FC<Props> = ({ correctAnswersCount, quizLength }) => {
       <Text>
         Вы ответили правильно на {correctAnswersCount} вопросов из {quizLength}
       </Text>
-      <Button onClick={() => navigate(-2)}>ОК</Button>
+      <Button onClick={() => navigate(-1)}>ОК</Button>
     </Container>
   );
 };
