@@ -4,22 +4,22 @@ import { Dispatch } from "react";
 import { API_PARAGRAPHS_URL, API_PERSONS_URL, API_QUIZ_URL } from "../../constants/constants";
 import { ActionTypes, AppActions } from "./actionTypes";
 
-export const fetchParagraphs = () => {
+export const fetchBooks = () => {
     return async (dispatch: Dispatch<AppActions>) => {
         return axios.get(API_PARAGRAPHS_URL).then(({data}) => {
             return dispatch({
-                type: ActionTypes.SET_PARAGRAPHS,
+                type: ActionTypes.SET_BOOKS,
                 payload: data
             })
         })   
     }
 }
 
-export const  fetchParagraphById = (id: number) => {
+export const fetchBookById = (id: number) => {
     return async (dispatch: Dispatch<AppActions>) => {
         return axios.get(`${API_PARAGRAPHS_URL}/${id}`).then(({data}) => {
             return dispatch({
-                type: ActionTypes.SET_CURRENT_PARAGRAPH,
+                type: ActionTypes.SET_CURRENT_BOOK,
                 payload: data
             })
         })

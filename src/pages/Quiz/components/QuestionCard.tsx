@@ -39,7 +39,7 @@ const QuestionContainer = styled.div`
     font-weight: 300;
     font-size: 14px;
     line-height: 16px;
-    color: var(--secondary-accent-color);
+    color: var(--text-color);
 `
 
 const QuestionNumber = styled.div`

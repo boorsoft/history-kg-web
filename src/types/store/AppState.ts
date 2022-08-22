@@ -1,8 +1,7 @@
-export interface Paragraph {
+export interface Book {
     id: number;
     title: string;
-    text: string;
-    image: string;
+    fileName: string;
 }
 
 export interface Person {
@@ -31,10 +30,10 @@ export interface Quiz {
 }
 
 export interface AppState {
-    paragraphs: {
-        data: Paragraph[];
+    books: {
+        data: Book[];
         isLoading: boolean;
-        currentParagraph?: Paragraph;
+        currentBook?: Book;
     };
     persons: {
         data: Person[];

@@ -1,8 +1,8 @@
-import { Paragraph, Person, Quiz } from "../../types/store/AppState";
+import { Book, Person, Quiz } from "../../types/store/AppState";
 
 export enum ActionTypes {
-  SET_PARAGRAPHS = "SET_PARAGRAPHS",
-  SET_CURRENT_PARAGRAPH = "SET_CURRENT_PARAGRAPH",
+  SET_BOOKS = "SET_BOOKS",
+  SET_CURRENT_BOOK = "SET_CURRENT_BOOK",
   SET_PERSONS = "SET_PERSONS",
   SET_CURRENT_PERSON = "SET_CURRENT_PERSON",
   SET_QUIZZES = "SET_QUIZZES",
@@ -10,13 +10,13 @@ export enum ActionTypes {
 }
 
 export type ParagraphsAction = {
-  type: ActionTypes.SET_PARAGRAPHS;
-  payload: Paragraph[];
+  type: ActionTypes.SET_BOOKS;
+  payload: Book[];
 };
 
 export type CurrentParagraphAction = {
-  type: ActionTypes.SET_CURRENT_PARAGRAPH;
-  payload: Paragraph;
+  type: ActionTypes.SET_CURRENT_BOOK;
+  payload: Book;
 };
 
 export type PersonsAction = {

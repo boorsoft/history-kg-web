@@ -24,7 +24,7 @@ const PersonCard: FC<Props> = ({person, route}) => {
 const Container = styled.div`
     cursor: pointer;
     margin-right: 15px;
-    height: 220px;
+    height: 230px;
 `
 
 const Image = styled.div<{image: string}>`

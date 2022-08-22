@@ -2,10 +2,10 @@ import { AppState } from "../../types/store/AppState";
 import { ActionTypes, AppActions } from "./actionTypes";
 
 export const initialState: AppState = {
-    paragraphs: {
+    books: {
         data: [],
         isLoading: true,
-        currentParagraph: undefined
+        currentBook: undefined
     },
     persons: {
         data: [],
@@ -21,10 +21,10 @@ export const initialState: AppState = {
 
 const appReducer = (state: AppState = initialState, action: AppActions) => {
     switch (action.type) {
-        case ActionTypes.SET_PARAGRAPHS:
-            return { ...state, paragraphs: { ...state.paragraphs, data: action.payload, isLoading: false } };
-        case ActionTypes.SET_CURRENT_PARAGRAPH:
-            return { ...state, paragraphs: {...state.paragraphs, currentParagraph: action.payload, isLoading: false} };
+        case ActionTypes.SET_BOOKS:
+            return { ...state, books: { ...state.books, data: action.payload, isLoading: false } };
+        case ActionTypes.SET_CURRENT_BOOK:
+            return { ...state, books: {...state.books, currentBook: action.payload, isLoading: false} };
         case ActionTypes.SET_PERSONS:
             return { ...state, persons: {...state.persons, data: action.payload, isLoading: false } };
         case ActionTypes.SET_CURRENT_PERSON:
