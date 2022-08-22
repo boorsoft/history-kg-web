@@ -12,11 +12,13 @@ import { Person, Quiz } from "../../../types/store/AppState";
 import PersonCard from "../../Persons/components/PersonCard";
 import BookCard from "./BookCard";
 import QuizCard from "../../Quiz/components/QuizCard";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   title: string;
   scroll: "horizontal" | "vertical";
   type: "books" | "quiz" | "persons" | "documents";
+  route?: string;
   maxLength?: number;
 };
 
@@ -75,15 +77,19 @@ const SectionContent = ({ scroll, type }: Props) => {
   }
 };
 
-const Section = ({ scroll, title, type, maxLength = 10 }: Props) => {
+const Section = ({ scroll, title, type, route, maxLength = 10 }: Props) => {
+  const navigate = useNavigate()
+
   return (
     <Container>
       <SectionHeader>
         <SectionTitle>{title}</SectionTitle>
-        <ViewAllButton onClick={() => {}}>
-          <ViewAllButtonText>Показать все</ViewAllButtonText>
-          <ViewAllButtonIcon />
-        </ViewAllButton>
+        {route && (
+          <ViewAllButton onClick={() => navigate(route)}>
+            <ViewAllButtonText>Показать все</ViewAllButtonText>
+            <ViewAllButtonIcon />
+          </ViewAllButton>
+        )}
       </SectionHeader>
       <SectionContent scroll={scroll} type={type} title={title} />
     </Container>
@@ -114,6 +120,7 @@ const ViewAllButton = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  cursor: pointer;
 `;
 
 const ViewAllButtonText = styled.h4`
@@ -131,7 +138,7 @@ const ViewAllButtonIcon = styled(MdArrowForwardIos)`
 const ScrollContainer = styled.div<{ scroll: string }>`
   width: 100%;
   display: flex;
-  flex-direction: ${({scroll}) => scroll === 'vertical' ? 'column' : 'row'};
+  flex-direction: ${({ scroll }) => (scroll === "vertical" ? "column" : "row")};
   overflow-x: ${({ scroll }) => scroll === "horizontal" && "scroll"};
   overflow-y: ${({ scroll }) => scroll === "vertical" && "scroll"};
   padding: 15px 0;
