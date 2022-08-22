@@ -1,15 +1,19 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 type Props = {
   title: string;
   author: string;
   cityAndYear: string;
+  route: string;
 };
 
-const BookCard = ({ title, author, cityAndYear }: Props) => {
+const BookCard = ({ title, author, cityAndYear, route }: Props) => {
+  const navigate = useNavigate()
+
   return (
-    <Container>
+    <Container onClick={() => navigate(route)}>
       <div>
         <Title>{title}</Title>
         <Author>{author}</Author>

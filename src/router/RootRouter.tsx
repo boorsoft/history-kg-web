@@ -7,6 +7,7 @@ import PersonPage from "../pages/Persons/components/PersonPage";
 import Persons from "../pages/Persons/Persons";
 import QuizPage from "../pages/Quiz/QuizPage";
 import QuizMenu from "../pages/Quiz/QuizMenu";
+import PDFViewer from "../pages/PDFViewer/PDFViewer";
 
 const RootRouter = () => {
     return (
@@ -15,6 +16,7 @@ const RootRouter = () => {
                 <Routes>
                     <Route path={ROUTES.ADMIN + "/*"} element={<AdminPage />} />
                     <Route path={ROUTES.HOME} element={<Home />} />
+                    <Route path={ROUTES.BOOK} element={<PDFViewer />} />
                     <Route path={ROUTES.PERSONS} element={<Persons />} />
                     <Route path={ROUTES.QUIZ} element={<QuizMenu />} />
                     <Route path={`${ROUTES.PERSONS}/:id`} element={<PersonPage />} />
