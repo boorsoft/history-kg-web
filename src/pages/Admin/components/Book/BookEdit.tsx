@@ -1,6 +1,6 @@
 import React from "react";
 import { FC } from "react";
-import { Edit, required, SimpleForm, TextInput } from "react-admin";
+import { Edit, ReferenceField, required, SimpleForm, TextField, TextInput } from "react-admin";
 
 const BookEdit: FC = (props) => {
     return (
@@ -8,6 +8,9 @@ const BookEdit: FC = (props) => {
             <SimpleForm>
                 <TextInput disabled source='id' />
                 <TextInput source="title" validate={required()} />
+                <ReferenceField source="subjectId" reference="subjects">
+                    <TextField source="title" />
+                </ReferenceField>
                 <TextInput disabled source="fileName" validate={required()} />
             </SimpleForm>
         </Edit>

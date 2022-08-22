@@ -13,6 +13,9 @@ const BooksList: FC = (props) => {
       <Datagrid>
           <TextField source="id" />
           <TextField source="title" />
+          <TextField source="author" />
+          <TextField source="city" />
+          <TextField source="year" />
           <TextField source="fileName" />
           <EditButton resource="/books" />
           <DeleteButton resource="books" />

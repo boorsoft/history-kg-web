@@ -22,6 +22,9 @@ import QuizList from "./components/Quiz/QuizList";
 import QuizCreate from "./components/Quiz/QuizCreate";
 import QuizEdit from "./components/Quiz/QuizEdit";
 import { useParams } from "react-router-dom";
+import SubjectList from "./components/Subject/SubjectList";
+import SubjectCreate from "./components/Subject/SubjectCreate";
+import SubjectEdit from "./components/Subject/SubjectEdit";
 
 const httpClient = (url: string, options: Options = {}) => {
     if (!options.headers) {
@@ -83,6 +86,12 @@ const AdminPage = () => {
             dataProvider={dataProvider}
             requireAuth
         >
+            <Resource 
+                name="subjects"
+                list={SubjectList}
+                create={SubjectCreate}
+                edit={SubjectEdit}
+            />
             <Resource
                 name="books"
                 list={BooksList}
