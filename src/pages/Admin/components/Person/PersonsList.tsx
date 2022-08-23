@@ -28,3 +28,4 @@ const PersonsList: FC = (props) => {
 };
 
 export default PersonsList;
+  

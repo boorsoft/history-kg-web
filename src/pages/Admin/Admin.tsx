@@ -66,6 +66,10 @@ const AdminPage = () => {
             let formData = new FormData();
 
             formData.append('title', params.data.title)
+            formData.append('author', params.data.author)
+            formData.append('city', params.data.city)
+            formData.append('year', params.data.year)
+            formData.append('subjectId', params.data.subjectId)
             formData.append("file", params.data.file.rawFile);
 
             return axios({

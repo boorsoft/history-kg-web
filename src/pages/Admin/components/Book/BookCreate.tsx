@@ -9,6 +9,7 @@ import {
   FileField,
   ReferenceInput,
   SelectInput,
+  NumberInput,
 } from "react-admin";
 
 const BookCreate: FC = (props) => {
@@ -17,8 +18,8 @@ const BookCreate: FC = (props) => {
       <SimpleForm>
         <TextInput source="title" validate={required()} />
         <TextInput source="author" validate={required()} />
-        <TextInput source="city" validate={required()} />
-        <TextInput source="year" validate={required()} />
+        <TextInput source="city" />
+        <NumberInput source="year" />
         <ReferenceInput source="subjectId" reference="subjects" validate={required()}>
             <SelectInput optionText="title" validate={required()} />
         </ReferenceInput>
@@ -28,6 +29,7 @@ const BookCreate: FC = (props) => {
           multiple={false}
           label="Book file"
           accept="application/pdf"
+          validate={required()}
         >
           <FileField source="fileName" title="title" />
         </FileInput>
