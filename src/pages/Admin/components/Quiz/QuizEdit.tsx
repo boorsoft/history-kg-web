@@ -23,11 +23,11 @@ const QuizEdit: FC = (props) => {
         </ReferenceInput>
         <ArrayInput source="questions">
           <SimpleFormIterator>
-            <TextInput source="id" disabled />
+            {/* <TextInput source="id" disabled /> */}
             <TextInput source="text" />
             <ArrayInput source="answers">
               <SimpleFormIterator>
-                <TextInput source="id" disabled />
+                {/* <TextInput source="id" disabled /> */}
                 <TextInput source="text" />
                 <BooleanInput source="isCorrectAnswer" />
               </SimpleFormIterator>

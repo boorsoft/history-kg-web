@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://historykg.boorsoft.com'
+export const BASE_URL = 'http://localhost:3000'
 export const LOGIN_URL = `${BASE_URL}/auth/login`
 export const API_URL = `${BASE_URL}/api`
 export const API_BOOKS_URL = `${API_URL}/books`

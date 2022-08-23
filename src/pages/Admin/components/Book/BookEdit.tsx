@@ -3,7 +3,7 @@ import { FC } from "react";
 import {
   Edit,
   NumberInput,
-  ReferenceField,
+  ReferenceInput,
   required,
   SelectInput,
   SimpleForm,
@@ -18,9 +18,9 @@ const BookEdit: FC = (props) => {
         <TextInput source="title" validate={required()} />
         <TextInput source="city" />
         <NumberInput source="year" />
-        <ReferenceField source="subjectId" reference="subjects">
+        <ReferenceInput source="subjectId" reference="subjects">
           <SelectInput optionText="title" validate={required()} />
-        </ReferenceField>
+        </ReferenceInput>
         <TextInput disabled source="fileName" validate={required()} />
       </SimpleForm>
     </Edit>
