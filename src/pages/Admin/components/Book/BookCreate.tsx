@@ -8,7 +8,7 @@ import {
   FileInput,
   FileField,
   ReferenceInput,
-  TextField,
+  SelectInput,
 } from "react-admin";
 
 const BookCreate: FC = (props) => {
@@ -19,8 +19,8 @@ const BookCreate: FC = (props) => {
         <TextInput source="author" validate={required()} />
         <TextInput source="city" validate={required()} />
         <TextInput source="year" validate={required()} />
-        <ReferenceInput source="subjectId" reference="subjects">
-            <TextField source="title" />
+        <ReferenceInput source="subjectId" reference="subjects" validate={required()}>
+            <SelectInput optionText="title" validate={required()} />
         </ReferenceInput>
         <FileInput
           maxSize={50000000}

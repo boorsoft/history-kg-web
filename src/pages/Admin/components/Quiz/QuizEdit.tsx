@@ -4,6 +4,9 @@ import {
   ArrayInput,
   BooleanInput,
   Edit,
+  ReferenceInput,
+  required,
+  SelectInput,
   SimpleForm,
   SimpleFormIterator,
   TextInput,
@@ -14,7 +17,10 @@ const QuizEdit: FC = (props) => {
     <Edit title="Create a quiz" {...props}>
       <SimpleForm>
         <TextInput source="id" disabled />
-        <TextInput source="title" />
+        <TextInput source="title" validate={required()} />
+        <ReferenceInput source="subjectId" reference="subjects">
+          <SelectInput optionText="title" validate={required()} />
+        </ReferenceInput>
         <ArrayInput source="questions">
           <SimpleFormIterator>
             <TextInput source="id" disabled />

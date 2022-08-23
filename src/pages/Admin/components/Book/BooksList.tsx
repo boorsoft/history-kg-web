@@ -6,21 +6,27 @@ import {
   TextField,
   EditButton,
   DeleteButton,
+  ReferenceField,
 } from "react-admin";
 
 const BooksList: FC = (props) => {
-  return <List {...props}>
+  return (
+    <List {...props}>
       <Datagrid>
-          <TextField source="id" />
+        <TextField source="id" />
+        <TextField source="title" />
+        <TextField source="author" />
+        <TextField source="city" />
+        <TextField source="year" />
+        <TextField source="fileName" />
+        <ReferenceField label="Subject" source="subjectId" reference="subjects">
           <TextField source="title" />
-          <TextField source="author" />
-          <TextField source="city" />
-          <TextField source="year" />
-          <TextField source="fileName" />
-          <EditButton resource="/books" />
-          <DeleteButton resource="books" />
+        </ReferenceField>
+        <EditButton resource="/books" />
+        <DeleteButton resource="books" />
       </Datagrid>
-  </List>;
+    </List>
+  );
 };
 
 export default BooksList;

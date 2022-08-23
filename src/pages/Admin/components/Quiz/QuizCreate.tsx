@@ -8,6 +8,8 @@ import {
   SimpleFormIterator,
   TextInput,
   required,
+  ReferenceInput,
+  SelectInput,
 } from "react-admin";
 
 const QuizCreate: FC = (props) => {
@@ -15,6 +17,9 @@ const QuizCreate: FC = (props) => {
     <Create title="Create a quiz" {...props}>
       <SimpleForm>
         <TextInput source="title" validate={required()} />
+        <ReferenceInput source="subjectId" reference="subjects">
+          <SelectInput optionText="title" validate={required()} />
+        </ReferenceInput>
         <ArrayInput source="questions" validate={required()}>
           <SimpleFormIterator>
             <TextInput source="text" validate={required()} />
