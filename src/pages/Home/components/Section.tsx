@@ -48,10 +48,11 @@ const SectionContent = ({ scroll, type }: Props) => {
       <ScrollContainer scroll={scroll}>
         {books.data.map((book: Book) => (
           <BookCard
+            key={book.id}
             title={book.title}
             author={book.author}
             cityAndYear={`${book.city} ${book.year}`}
-            route={ROUTES.BOOK}
+            route={`${ROUTES.BOOKS}/${book.id}`}
           />
         ))}
       </ScrollContainer>

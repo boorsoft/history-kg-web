@@ -16,7 +16,7 @@ const RootRouter = () => {
                 <Routes>
                     <Route path={ROUTES.ADMIN + "/*"} element={<AdminPage />} />
                     <Route path={ROUTES.HOME} element={<Home />} />
-                    <Route path={ROUTES.BOOK} element={<PDFViewer />} />
+                    <Route path={`${ROUTES.BOOKS}/:id`} element={<PDFViewer />} />
                     <Route path={ROUTES.PERSONS} element={<Persons />} />
                     <Route path={ROUTES.QUIZ} element={<QuizMenu />} />
                     <Route path={`${ROUTES.PERSONS}/:id`} element={<PersonPage />} />

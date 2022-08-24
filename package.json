@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@material-ui/core": "^4.12.4",
+    "@react-pdf-viewer/core": "^3.7.0",
     "@reduxjs/toolkit": "^1.8.1",
     "@tiptap/extension-image": "^2.0.0-beta.27",
     "@types/react-dom": "^18.0.4",
@@ -19,6 +20,7 @@
     "@types/styled-components": "^5.1.25",
     "axios": "^0.27.2",
     "html-react-parser": "^1.4.12",
+    "pdfjs-dist": "^2.15.349",
     "ra-data-simple-rest": "^4.1.0",
     "ra-input-rich-text": "^4.1.0",
     "react": "^18.1.0",

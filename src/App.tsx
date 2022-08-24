@@ -1,11 +1,11 @@
 import React from "react";
-import RootRouter from "./router/RootRouter";
-import "./index.css";
-
-import { createGlobalStyle } from "styled-components";
-import Wrapper from "./components/Wrapper";
 import { Provider } from "react-redux";
+import { createGlobalStyle } from "styled-components";
+
+import RootRouter from "./router/RootRouter";
+import Wrapper from "./components/Wrapper";
 import store from "./store/store";
+import "./index.css";
 
 const App = () => {
   return (
