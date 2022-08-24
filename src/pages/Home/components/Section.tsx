@@ -108,7 +108,6 @@ const Section = ({ scroll, title, type, route, maxLength = 10 }: Props) => {
 
 const Container = styled.div`
   width: 100%;
-  padding: 5px;
 `;
 
 const SectionHeader = styled.div`
@@ -124,6 +123,7 @@ const SectionTitle = styled.div`
   line-height: 21px;
   display: flex;
   align-items: center;
+  margin-left: 20px;
 `;
 
 const ViewAllButton = styled.div`
@@ -149,13 +149,17 @@ const ScrollContainer = styled.div<{ scroll: string }>`
   width: 100%;
   display: flex;
   flex-direction: ${({ scroll }) => (scroll === "vertical" ? "column" : "row")};
-  overflow-x: ${({ scroll }) => scroll === "horizontal" && "scroll"};
-  overflow-y: ${({ scroll }) => scroll === "vertical" && "scroll"};
+  overflow-x: ${({ scroll }) => scroll === "horizontal" && "auto"};
+  overflow-y: ${({ scroll }) => scroll === "vertical" && "auto"};
   padding: 15px 0;
   scrollbar-width: none;
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  &:nth-child(2) {
+    padding-inline-start: 20px;
   }
 `;
 

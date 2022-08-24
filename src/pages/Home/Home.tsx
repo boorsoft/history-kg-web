@@ -26,7 +26,7 @@ export const Container = styled.div`
   align-items: center;
   width: 100%;
   min-height: 100vh;
-  padding: 20px;
+  /* padding: 20px; */
   padding-top: 180px;
 `;
 
