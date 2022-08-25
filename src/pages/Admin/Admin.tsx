@@ -52,7 +52,7 @@ const AdminPage = () => {
       }),
     create: async (resource, params) => {
       if (resource === "books" && params.data.file) {
-        console.log('resource with file')
+
         let formData = new FormData();
 
         formData.append("title", params.data.title);
@@ -67,7 +67,8 @@ const AdminPage = () => {
           data: formData,
           url: `${API_URL}/${resource}`,
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            'Content-Type': 'application/pdf',
+            'Authorization': `Bearer ${localStorage.getItem("token")}`,
           },
         });
       }

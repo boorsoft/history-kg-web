@@ -1753,10 +1753,17 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.5.tgz#db5a11bf66bdab39569719555b0f76e138d7bd64"
   integrity sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==
 
-"@react-pdf-viewer/core@^3.7.0":
+"@react-pdf-viewer/core@3.7.0", "@react-pdf-viewer/core@^3.7.0":
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/@react-pdf-viewer/core/-/core-3.7.0.tgz#aa216954f92d9c0ffca300d3ebba998b0bbe6596"
   integrity sha512-mMuG+bBNG+XdhK5QfdiC7h0wkXlleKCkGUmz53QIw/56ppmwTTqvK5u5JeAo/Tr7vS7wHpAgp26qCxL6NUHa4Q==
+
+"@react-pdf-viewer/zoom@^3.7.0":
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/@react-pdf-viewer/zoom/-/zoom-3.7.0.tgz#75d27e943b497f35b8d358d0375fb4fbc4390145"
+  integrity sha512-EP95GvUDliJxvE5HcNMZAaqeTqs51SBl8ZDmyOEjkP3P67xMenKOEPXFyVhrqXnN0GMNv0TO2r8AVIOznwGgEQ==
+  dependencies:
+    "@react-pdf-viewer/core" "3.7.0"
 
 "@reduxjs/toolkit@^1.8.1":
   version "1.8.1"
