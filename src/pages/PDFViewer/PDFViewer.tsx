@@ -2,14 +2,16 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Worker, Viewer } from "@react-pdf-viewer/core";
 import { zoomPlugin } from "@react-pdf-viewer/zoom";
+import { defaultLayoutPlugin, ToolbarProps } from '@react-pdf-viewer/default-layout';
+
 import styled from "styled-components";
 
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import '@react-pdf-viewer/zoom/lib/styles/index.css';
+import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 
 import Header from "../../components/Header";
 import { AppDispatch, RootState } from "../../store/store";
-import { Book } from "../../types/store/AppState";
 import { BASE_URL } from "../../constants/constants";
 import { bindActionCreators } from "redux";
 import { fetchBookById } from "../../store/app/actionCreators";
@@ -27,7 +29,8 @@ const PDFViewer = () => {
 
   const getBook = bindActionCreators(fetchBookById, dispatch);
   
-  const zoomPluginInstance = zoomPlugin();
+  const zoomPluginInstance = zoomPlugin({enableShortcuts: true});
+  const defaultLayoutPluginInstance = defaultLayoutPlugin({sidebarTabs: () => []});
 
   useEffect(() => {
     id && getBook(+id);
@@ -36,11 +39,11 @@ const PDFViewer = () => {
 
   return (
     <Wrapper>
-      <Header title={book ? book.title : "История Кыргызстана"} />
+      {/* <Header title={book ? book.title : "История Кыргызстана"} /> */}
       <Container>
         <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.min.js">
           <PDFWrapper>
-            <Viewer plugins={[zoomPluginInstance]} fileUrl={`${BASE_URL}/books/${book?.fileName}`} />
+            <Viewer plugins={[zoomPluginInstance, defaultLayoutPluginInstance]} defaultScale={1.0} fileUrl={`${BASE_URL}/books/${book?.fileName}`} />
           </PDFWrapper>
         </Worker>
       </Container>
@@ -59,7 +62,7 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  padding-top: 90px;
+  /* padding-top: 90px; */
   width: 100%;
 `;
 
