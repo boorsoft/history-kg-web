@@ -25,6 +25,9 @@ import { useParams } from "react-router-dom";
 import SubjectList from "./components/Subject/SubjectList";
 import SubjectCreate from "./components/Subject/SubjectCreate";
 import SubjectEdit from "./components/Subject/SubjectEdit";
+import ArticlesList from "./components/Article/ArticlesList";
+import ArticleCreate from "./components/Article/ArticleCreate";
+import ArticleEdit from "./components/Article/ArticleEdit";
 
 const httpClient = (url: string, options: Options = {}) => {
   if (!options.headers) {
@@ -114,6 +117,12 @@ const AdminPage = () => {
         list={QuizList}
         create={QuizCreate}
         edit={QuizEdit}
+      />
+      <Resource 
+        name="articles"
+        list={ArticlesList}
+        create={ArticleCreate}
+        edit={ArticleEdit}
       />
     </Admin>
   );
