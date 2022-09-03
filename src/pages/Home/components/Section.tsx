@@ -6,55 +6,59 @@ import styled from "styled-components";
 
 import { ROUTES } from "../../../constants/routes";
 import {
+  fetchArticles,
   fetchBooks,
   fetchPersons,
   fetchQuizzes,
 } from "../../../store/app/actionCreators";
 import { AppDispatch, RootState } from "../../../store/store";
-import { Book, Person, Quiz } from "../../../types/store/AppState";
+import { Article, Book, Person, Quiz } from "../../../types/store/AppState";
 
 import PersonCard from "../../Persons/components/PersonCard";
 import BookCard from "./BookCard";
 import QuizCard from "../../Quiz/components/QuizCard";
 import { useNavigate } from "react-router-dom";
+import ArticleCard from "./ArticleCard";
 
 type Props = {
   title: string;
   scroll: "horizontal" | "vertical";
-  type: "books" | "quiz" | "persons" | "documents";
+  type: "books" | "quiz" | "persons" | "articles";
   route?: string;
-  maxLength?: number;
 };
 
 const SectionContent = ({ scroll, type }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { persons, quizzes, books } = useSelector(
+  const { persons, quizzes, books, articles } = useSelector(
     (state: RootState) => state.app
   );
 
   const getBooks = bindActionCreators(fetchBooks, dispatch);
   const getQuizzes = bindActionCreators(fetchQuizzes, dispatch);
   const getPersons = bindActionCreators(fetchPersons, dispatch);
+  const getArticles = bindActionCreators(fetchArticles, dispatch);
 
   useEffect(() => {
     if (type === "persons") getPersons(6);
     else if (type === "quiz") getQuizzes(4);
     else if (type === "books") getBooks(6);
+    else if (type === "articles") getArticles(6);
   }, []);
 
   if (type === "books") {
     return (
       <ScrollContainer scroll={scroll}>
-        {books.data.map((book: Book) => (
-          <BookCard
-            key={book.id}
-            title={book.title}
-            author={book.author}
-            cityAndYear={`${book.city} ${book.year}`}
-            route={`${ROUTES.BOOKS}/${book.id}`}
-          />
-        ))}
+        {!books.isLoading &&
+          books.data.map((book: Book) => (
+            <BookCard
+              key={book.id}
+              title={book.title}
+              author={book.author}
+              cityAndYear={`${book.city} ${book.year}`}
+              route={`${ROUTES.BOOKS}/${book.id}`}
+            />
+          ))}
       </ScrollContainer>
     );
   } else if (type === "persons") {
@@ -83,12 +87,26 @@ const SectionContent = ({ scroll, type }: Props) => {
           ))}
       </ScrollContainer>
     );
+  } else if (type === "articles") {
+    return (
+      <ScrollContainer scroll={scroll}>
+        {!articles.isLoading &&
+          articles.data.map((article: Article) => (
+            <ArticleCard
+              title={article.title}
+              text={article.text}
+              key={article.id}
+              route={`${ROUTES.ARTICLES}/${article.id}`}
+            />
+          ))}
+      </ScrollContainer>
+    );
   } else {
     return <></>;
   }
 };
 
-const Section = ({ scroll, title, type, route, maxLength = 10 }: Props) => {
+const Section = ({ scroll, title, type, route}: Props) => {
   const navigate = useNavigate();
 
   return (

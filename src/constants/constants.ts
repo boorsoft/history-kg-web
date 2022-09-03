@@ -4,3 +4,4 @@ export const API_URL = `${BASE_URL}/api`
 export const API_BOOKS_URL = `${API_URL}/books`
 export const API_PERSONS_URL = `${API_URL}/persons`
 export const API_QUIZ_URL = `${API_URL}/quiz`
+export const API_ARTICLES_URL = `${API_URL}/articles`

@@ -2,6 +2,7 @@ import axios from "axios";
 import { Dispatch } from "react";
 
 import {
+  API_ARTICLES_URL,
   API_BOOKS_URL,
   API_PERSONS_URL,
   API_QUIZ_URL,
@@ -70,6 +71,30 @@ export const fetchQuizById = (id: number) => {
     return axios.get(`${API_QUIZ_URL}/${id}`).then(({ data }) => {
       return dispatch({
         type: ActionTypes.SET_CURRENT_QUIZ,
+        payload: data,
+      });
+    });
+  };
+};
+
+export const fetchArticles = (limit?: number) => {
+  return async (dispatch: Dispatch<AppActions>) => {
+    return axios
+      .get(API_ARTICLES_URL, { params: { limit } })
+      .then(({ data }) => {
+        return dispatch({
+          type: ActionTypes.SET_ARTICLES,
+          payload: data,
+        });
+      });
+  };
+};
+
+export const fetchArticleById = (id: number) => {
+  return async (dispatch: Dispatch<AppActions>) => {
+    return axios.get(`${API_ARTICLES_URL}/${id}`).then(({ data }) => {
+      return dispatch({
+        type: ActionTypes.SET_CURRENT_ARTICLE,
         payload: data,
       });
     });

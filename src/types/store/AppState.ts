@@ -32,6 +32,12 @@ export interface Quiz {
     questions: Question[];
 }
 
+export interface Article {
+    id: number;
+    title: string;
+    text: string;
+}
+
 export interface AppState {
     books: {
         data: Book[];
@@ -47,5 +53,10 @@ export interface AppState {
         data: Quiz[];
         isLoading: boolean;
         currentQuiz?: Quiz;
+    },
+    articles: {
+        data: Article[];
+        isLoading: boolean;
+        currentArticle?: Article;
     }
 }
