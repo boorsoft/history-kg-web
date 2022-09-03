@@ -38,9 +38,9 @@ const SectionContent = ({ scroll, type }: Props) => {
   const getPersons = bindActionCreators(fetchPersons, dispatch);
 
   useEffect(() => {
-    if (type === "persons") getPersons();
-    else if (type === "quiz") getQuizzes();
-    else if (type === "books") getBooks();
+    if (type === "persons") getPersons(6);
+    else if (type === "quiz") getQuizzes(4);
+    else if (type === "books") getBooks(6);
   }, []);
 
   if (type === "books") {
