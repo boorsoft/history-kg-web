@@ -14,7 +14,6 @@ const ArticlesList: FC = (props) => {
       <Datagrid>
         <TextField source="id" />
         <TextField source="title" />
-        <TextField source="text" maxWidth={200} />
         <EditButton resource="/articles" />
         <DeleteButton resource="articles" />
       </Datagrid>
