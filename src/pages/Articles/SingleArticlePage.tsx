@@ -27,7 +27,7 @@ const SingleArticlePage: FC = () => {
 
   return (
     <Wrapper>
-      <Header title={currentArticle!.title || ""} />
+      <Header title={currentArticle?.title || ""} />
       <Container>
         {isLoading && <LoadingSpinner />}
         <Text>
@@ -44,7 +44,7 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  margin-top: 50px;
+  margin-top: 80px;
   padding: 20px;
   /* width: clamp(350px, 90vw, 500px); */
   width: 100%;

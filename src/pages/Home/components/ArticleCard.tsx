@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import sanitizeHtml from 'sanitize-html'
 
 type Props = {
   title: string;
@@ -15,7 +16,9 @@ const ArticleCard = ({ title, text, route }: Props) => {
     <Container onClick={() => navigate(route)}>
       <div>
         <Title>{title}</Title>
-        <Text>{text}</Text>
+        <Text>{sanitizeHtml(text, {
+          allowedTags: []
+        })}</Text>
       </div>
     </Container>
   );
