@@ -15,9 +15,12 @@ import { Container } from "../Home/Home";
 const BooksPage: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { books, books: { isLoading } } = useSelector((state: RootState) => state.app);
+  const {
+    books,
+    books: { isLoading },
+  } = useSelector((state: RootState) => state.app);
 
-  const getBooks = bindActionCreators(fetchBooks, dispatch)
+  const getBooks = bindActionCreators(fetchBooks, dispatch);
 
   useEffect(() => {
     getBooks();
@@ -25,7 +28,7 @@ const BooksPage: FC = () => {
 
   return (
     <>
-      <Header title='Книги' />
+      <Header title="Книги" />
       <Container>
         {isLoading && <LoadingSpinner />}
         <GridContainer>

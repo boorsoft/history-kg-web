@@ -17,17 +17,20 @@ import { Container } from "../Home/Home";
 const ArticlesPage: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { articles, articles: { isLoading } } = useSelector((state: RootState) => state.app);
+  const {
+    articles,
+    articles: { isLoading },
+  } = useSelector((state: RootState) => state.app);
 
   const getArticles = bindActionCreators(fetchArticles, dispatch);
 
   useEffect(() => {
-    getArticles()
+    getArticles();
   }, []);
 
   return (
     <>
-      <Header title='Статьи' />
+      <Header title="Статьи" />
       <Container>
         {isLoading && <LoadingSpinner />}
         <GridContainer>
@@ -41,7 +44,7 @@ const ArticlesPage: FC = () => {
                 route={`${ROUTES.ARTICLES}/${article.id}`}
               />
             ))}
-          </GridContainer>
+        </GridContainer>
       </Container>
     </>
   );
