@@ -16,6 +16,7 @@ const BookEdit: FC = (props) => {
       <SimpleForm>
         <TextInput disabled source="id" />
         <TextInput source="title" validate={required()} />
+        <TextInput source="author" validate={required()} />
         <TextInput source="city" />
         <NumberInput source="year" />
         <ReferenceInput source="subjectId" reference="subjects">

@@ -6,42 +6,41 @@ import styled from "styled-components";
 import Header from "../../components/Header";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import { ROUTES } from "../../constants/routes";
-import { fetchArticles, fetchBooks } from "../../store/app/actionCreators";
+import { fetchBooks } from "../../store/app/actionCreators";
 import { AppDispatch, RootState } from "../../store/store";
-import { Article, Book } from "../../types/store/AppState";
-import BooksList from "../Admin/components/Book/BooksList";
-import ArticleCard from "../Home/components/ArticleCard";
+import { Book } from "../../types/store/AppState";
 import BookCard from "../Home/components/BookCard";
 import { Container } from "../Home/Home";
 
-const ArticlesPage: FC = () => {
+const BooksPage: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { articles, articles: { isLoading } } = useSelector((state: RootState) => state.app);
+  const { books, books: { isLoading } } = useSelector((state: RootState) => state.app);
 
-  const getArticles = bindActionCreators(fetchArticles, dispatch);
+  const getBooks = bindActionCreators(fetchBooks, dispatch)
 
   useEffect(() => {
-    getArticles()
+    getBooks();
   }, []);
 
   return (
     <>
-      <Header title='Статьи' />
+      <Header title='Книги' />
       <Container>
         {isLoading && <LoadingSpinner />}
         <GridContainer>
-          {articles &&
-            !isLoading &&
-            articles.data.map((article: Article) => (
-              <ArticleCard
-                key={article.id}
-                title={article.title}
-                text={article.text}
-                route={`${ROUTES.ARTICLES}/${article.id}`}
+          {books &&
+            !books.isLoading &&
+            books.data.map((book: Book) => (
+              <BookCard
+                key={book.id}
+                title={book.title}
+                author={book.author}
+                cityAndYear={book.city + " " + book.year}
+                route={`${ROUTES.BOOKS}/${book.id}`}
               />
             ))}
-          </GridContainer>
+        </GridContainer>
       </Container>
     </>
   );
@@ -57,4 +56,4 @@ const GridContainer = styled.div`
   }
 `;
 
-export default ArticlesPage;
+export default BooksPage;

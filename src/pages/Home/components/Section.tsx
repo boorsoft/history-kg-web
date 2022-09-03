@@ -24,7 +24,7 @@ type Props = {
   title: string;
   scroll: "horizontal" | "vertical";
   type: "books" | "quiz" | "persons" | "articles";
-  route?: string;
+  route: string;
 };
 
 const SectionContent = ({ scroll, type }: Props) => {
@@ -113,14 +113,12 @@ const Section = ({ scroll, title, type, route}: Props) => {
     <Container>
       <SectionHeader>
         <SectionTitle>{title}</SectionTitle>
-        {route && (
           <ViewAllButton onClick={() => navigate(route)}>
             <ViewAllButtonText>Показать все</ViewAllButtonText>
             <ViewAllButtonIcon />
           </ViewAllButton>
-        )}
       </SectionHeader>
-      <SectionContent scroll={scroll} type={type} title={title} />
+      <SectionContent scroll={scroll} type={type} title={title} route={route} />
     </Container>
   );
 };
@@ -150,6 +148,7 @@ const ViewAllButton = styled.div`
   flex-direction: row;
   align-items: center;
   cursor: pointer;
+  margin-right: 7px;
 `;
 
 const ViewAllButtonText = styled.h4`
@@ -166,10 +165,11 @@ const ViewAllButtonIcon = styled(MdArrowForwardIos)`
 
 const ScrollContainer = styled.div<{ scroll: string }>`
   width: 100%;
+  height: auto;
   display: flex;
   flex-direction: ${({ scroll }) => (scroll === "vertical" ? "column" : "row")};
-  overflow-x: ${({ scroll }) => scroll === "horizontal" && "auto"};
-  overflow-y: ${({ scroll }) => scroll === "vertical" && "auto"};
+  overflow-x: ${({ scroll }) => scroll === "horizontal" && "scroll"};
+  overflow-y: ${({ scroll }) => scroll === "vertical" && "scroll"};
   padding: 15px 0;
   scrollbar-width: none;
 

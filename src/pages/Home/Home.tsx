@@ -10,7 +10,7 @@ const Home = () => {
     <>
       <Header title="История кыргызстана" isHome />
       <Container>
-        <Section title="Книги" scroll="horizontal" type="books" />
+        <Section title="Книги" scroll="horizontal" type="books" route={ROUTES.BOOKS} />
         <Section title="Исторические личности" scroll="horizontal" type="persons" route={ROUTES.PERSONS} />
         <Section title="Тестирование" scroll="vertical" type="quiz" route={ROUTES.QUIZ} />
         <Section title="Статьи" scroll="horizontal" type="articles" route={ROUTES.ARTICLES} />

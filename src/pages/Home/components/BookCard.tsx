@@ -30,8 +30,8 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 270px;
-  height: 115px;
-  padding: 7px 15px;
+  height: 120px;
+  padding: 3px 17px;
   margin-right: 20px;
   background: var(--secondary-color);
   box-shadow: 0px 14px 55px -5px rgba(73, 55, 38, 0.05);
