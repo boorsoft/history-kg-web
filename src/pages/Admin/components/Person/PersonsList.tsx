@@ -16,7 +16,7 @@ const PersonsList: FC = (props) => {
         <TextField source="id" />
         <TextField source="firstName" />
         <TextField source="lastName" />
-        <TextField source="image" />
+        {/* <TextField source="image" textOverflow={'ellipsis'} width={200} /> */}
         <ReferenceField label="Subject" source="subjectId" reference="subjects">
           <TextField source="title" />
         </ReferenceField>

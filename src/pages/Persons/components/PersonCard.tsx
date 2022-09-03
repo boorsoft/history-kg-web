@@ -33,9 +33,9 @@ const Image = styled.div<{image: string}>`
     height: 230px;
     background-color: var(--primary-color);
     background-image: ${({image}) => `url(${image})` };
-    background-position: center;
+    background-position: top;
     background-repeat: no-repeat;
-    background-size: 130%;
+    background-size: 135%;
     filter: drop-shadow(4px 4px 17px rgba(70, 68, 170, 0.2));
     border-radius: 15px;
 `

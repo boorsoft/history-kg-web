@@ -35,6 +35,7 @@ const Card = styled.div`
 `
 
 const QuestionContainer = styled.div`
+    width: 310px;
     position: relative;
     font-weight: 300;
     font-size: 14px;
