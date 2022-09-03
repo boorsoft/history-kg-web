@@ -16,6 +16,11 @@ export const initialState: AppState = {
         data: [],
         isLoading: true,
         currentQuiz: undefined
+    },
+    articles: {
+        data: [],
+        isLoading: true,
+        currentArticle: undefined
     }
 }
 
