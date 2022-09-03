@@ -8,6 +8,8 @@ import Persons from "../pages/Persons/Persons";
 import QuizPage from "../pages/Quiz/QuizPage";
 import QuizMenu from "../pages/Quiz/QuizMenu";
 import PDFViewer from "../pages/PDFViewer/PDFViewer";
+import ArticlesPage from "../pages/Articles/ArticlesPage";
+import SingleArticlePage from "../pages/Articles/SingleArticlePage";
 
 const RootRouter = () => {
     return (
@@ -21,6 +23,8 @@ const RootRouter = () => {
                     <Route path={ROUTES.QUIZ} element={<QuizMenu />} />
                     <Route path={`${ROUTES.PERSONS}/:id`} element={<PersonPage />} />
                     <Route path={`${ROUTES.QUIZ}/:id`} element={<QuizPage />} />
+                    <Route path={ROUTES.ARTICLES} element={<ArticlesPage />} />
+                    <Route path={`${ROUTES.ARTICLES}/:id`} element={<SingleArticlePage />} />
                 </Routes>
             </BrowserRouter>
         </div>

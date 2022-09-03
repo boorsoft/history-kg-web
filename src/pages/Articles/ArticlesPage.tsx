@@ -1,45 +1,44 @@
-import React, { useEffect } from "react";
-import { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import styled from "styled-components";
-import Header from "../../components/Header";
 
+import Header from "../../components/Header";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import { ROUTES } from "../../constants/routes";
-import { fetchPersons } from "../../store/app/actionCreators";
+import { fetchArticles } from "../../store/app/actionCreators";
 import { AppDispatch, RootState } from "../../store/store";
-import { Person } from "../../types/store/AppState";
-
+import { Article } from "../../types/store/AppState";
+import ArticleCard from "../Home/components/ArticleCard";
 import { Container } from "../Home/Home";
-import PersonCard from "./components/PersonCard";
 
-export const Persons: FC = () => {
+const ArticlesPage: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const {
-    persons,
-    persons: { isLoading },
+    articles,
+    articles: { isLoading },
   } = useSelector((state: RootState) => state.app);
 
-  const getPersons = bindActionCreators(fetchPersons, dispatch);
+  const getArticles = bindActionCreators(fetchArticles, dispatch);
 
   useEffect(() => {
-    getPersons();
+    getArticles();
   }, []);
 
   return (
     <>
-      <Header title="Исторические личности" />
+      <Header title="Статьи" />
       <Container>
         {isLoading && <LoadingSpinner />}
         <GridContainer>
           {!isLoading &&
-            persons.data.map((person: Person) => (
-              <PersonCard
-                key={person.id}
-                person={person}
-                route={`${ROUTES.PERSONS}/${person.id}`}
+            articles.data.map((article: Article) => (
+              <ArticleCard
+                key={article.id}
+                title={article.title}
+                text={article.text}
+                route={`${ROUTES.ARTICLES}/${article.id}`}
               />
             ))}
         </GridContainer>
@@ -52,6 +51,10 @@ const GridContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(15px, 5vw, 40px);
+
+  @media screen and (max-width: 650px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
-export default Persons;
+export default ArticlesPage;

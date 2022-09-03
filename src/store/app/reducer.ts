@@ -38,6 +38,10 @@ const appReducer = (state: AppState = initialState, action: AppActions) => {
             return { ...state, quizzes: {...state.quizzes, data: action.payload, isLoading: false} };
         case ActionTypes.SET_CURRENT_QUIZ:
             return { ...state, quizzes: {...state.quizzes, currentQuiz: action.payload, isLoading: false} };
+        case ActionTypes.SET_ARTICLES:
+            return { ...state, articles: { ...state.articles, data: action.payload, isLoading: false}};
+        case ActionTypes.SET_CURRENT_ARTICLE:
+            return { ...state, articles: { ...state.articles, currentArticle: action.payload, isLoading: false }}
         default:
             return {...state}
     }
