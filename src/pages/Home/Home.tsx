@@ -28,7 +28,11 @@ export const Container = styled.div`
   width: 100%;
   min-height: 100vh;
   /* padding: 20px; */
-  padding-top: 180px;
+  padding-top: 150px;
+
+  @media screen and (min-width: 600px) {
+    padding-top: 100px;
+  }
 `;
 
 export default Home;

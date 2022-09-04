@@ -50,6 +50,8 @@ const Container = styled.div`
 const Text = styled.div`
     margin: auto;
     max-width: 500px;
+    text-align: justify;
+    line-height: 25px;
 `
 
 export default PersonPage;
