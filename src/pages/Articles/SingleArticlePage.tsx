@@ -44,10 +44,14 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  margin-top: 80px;
+  margin-top: 120px;
   padding: 20px;
   /* width: clamp(350px, 90vw, 500px); */
   width: 100%;
+
+  @media screen and (min-width: 600px) {
+    margin-top: 80px;
+  }
 `;
 
 const Text = styled.div`
