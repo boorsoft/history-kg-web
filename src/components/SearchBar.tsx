@@ -2,9 +2,11 @@ import React, { FormEvent, useState } from "react";
 import styled from "styled-components";
 import { BiSearch } from "react-icons/bi";
 import axios from "axios";
-import { useDebouncedCallback } from 'use-debounce';
+import { useDebouncedCallback } from "use-debounce";
 
 import { API_SEARCH_URL } from "../constants/constants";
+
+import SearchResults from "./SearchResults";
 
 const search = (searchValue: string) => {
   return axios.get(API_SEARCH_URL, { params: { searchValue } });
@@ -12,18 +14,28 @@ const search = (searchValue: string) => {
 
 const SearchBar = () => {
   const [searchValue, setSearchValue] = useState<string>("");
-  const [searchResults, setSearchResults] = useState([])
+  const [searchResults, setSearchResults] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [canDisplayResults, setCanDisplayResults] = useState<boolean>(false);
 
   const debounced = useDebouncedCallback(() => {
-    search(searchValue).then((res) => setSearchResults(res.data))
-  }, 800)
+    setIsLoading(true);
+    setCanDisplayResults(true);
+    setSearchResults([])
+    
+    if (searchValue) {
+      search(searchValue.trim()).then((res) => {
+        setSearchResults(res.data);
+        setIsLoading(false);
+      });
+    }
+  }, 800);
 
   const handleInputChange = (e: FormEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     setSearchValue(e.currentTarget.value);
-    debounced()
-
+    debounced();
   };
 
   return (
@@ -36,6 +48,9 @@ const SearchBar = () => {
         />
         <SearchIcon />
       </Row>
+      {canDisplayResults && searchValue && (
+        <SearchResults isLoading={isLoading} results={searchResults} />
+      )}
     </SearchContainer>
   );
 };
