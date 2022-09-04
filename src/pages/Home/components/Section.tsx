@@ -19,6 +19,7 @@ import BookCard from "./BookCard";
 import QuizCard from "../../Quiz/components/QuizCard";
 import { useNavigate } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
+import LoadingSpinner from "../../../components/LoadingSpinner";
 
 type Props = {
   title: string;
@@ -49,6 +50,7 @@ const SectionContent = ({ scroll, type }: Props) => {
   if (type === "books") {
     return (
       <ScrollContainer scroll={scroll}>
+        {books.isLoading && <LoadingSpinner />}
         {!books.isLoading &&
           books.data.map((book: Book) => (
             <BookCard
@@ -64,6 +66,7 @@ const SectionContent = ({ scroll, type }: Props) => {
   } else if (type === "persons") {
     return (
       <ScrollContainer scroll={scroll}>
+        {persons.isLoading && <LoadingSpinner />}
         {!persons.isLoading &&
           persons.data.map((person: Person) => (
             <PersonCard
@@ -77,6 +80,7 @@ const SectionContent = ({ scroll, type }: Props) => {
   } else if (type === "quiz") {
     return (
       <ScrollContainer scroll={scroll}>
+        {quizzes.isLoading && <LoadingSpinner />}
         {!quizzes.isLoading &&
           quizzes.data.map((quiz: Quiz) => (
             <QuizCard
@@ -90,6 +94,7 @@ const SectionContent = ({ scroll, type }: Props) => {
   } else if (type === "articles") {
     return (
       <ScrollContainer scroll={scroll}>
+        {articles.isLoading && <LoadingSpinner />}
         {!articles.isLoading &&
           articles.data.map((article: Article) => (
             <ArticleCard
