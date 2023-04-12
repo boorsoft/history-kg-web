@@ -11,6 +11,7 @@ import PDFViewer from "../pages/PDFViewer/PDFViewer";
 import ArticlesPage from "../pages/Articles/ArticlesPage";
 import SingleArticlePage from "../pages/Articles/SingleArticlePage";
 import BooksPage from "../pages/Books/BooksPage";
+import Download from "../pages/Download/Download";
 
 const RootRouter = () => {
   return (
@@ -30,6 +31,7 @@ const RootRouter = () => {
             path={`${ROUTES.ARTICLES}/:id`}
             element={<SingleArticlePage />}
           />
+          <Route path={ROUTES.DOWNLOAD} element={<Download />} />
         </Routes>
       </BrowserRouter>
     </div>

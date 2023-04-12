@@ -14,7 +14,6 @@ import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/zoom/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 
-import Header from "../../components/Header";
 import { AppDispatch, RootState } from "../../store/store";
 import { BASE_URL } from "../../constants/constants";
 import { bindActionCreators } from "redux";
@@ -37,12 +36,10 @@ const PDFViewer = () => {
       {(slots: ToolbarSlot) => {
         const {
           CurrentPageInput,
-          Download,
           EnterFullScreen,
           GoToNextPage,
           GoToPreviousPage,
           NumberOfPages,
-          Print,
           ShowSearchPopover,
           Zoom,
           ZoomIn,
@@ -71,7 +68,14 @@ const PDFViewer = () => {
             <div style={{ padding: "0px 2px", marginLeft: "auto" }}>
               <GoToPreviousPage />
             </div>
-            <div style={{ padding: "0px 2px", flexDirection: "row", display: "flex", alignItems: "center" }}>
+            <div
+              style={{
+                padding: "0px 2px",
+                flexDirection: "row",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
               <CurrentPageInput /> / <NumberOfPages />
             </div>
             <div style={{ padding: "0px 2px" }}>
@@ -95,7 +99,7 @@ const PDFViewer = () => {
   const zoomPluginInstance = zoomPlugin({ enableShortcuts: true });
   const defaultLayoutPluginInstance = defaultLayoutPlugin({
     sidebarTabs: () => [],
-    renderToolbar
+    renderToolbar,
   });
 
   useEffect(() => {
@@ -105,7 +109,6 @@ const PDFViewer = () => {
 
   return (
     <Wrapper>
-      {/* <Header title={book ? book.title : "История Кыргызстана"} /> */}
       <Container>
         <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.min.js">
           <PDFWrapper>
