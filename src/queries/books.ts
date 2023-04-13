@@ -12,7 +12,7 @@ export function useBooksQuery() {
     },
     {
       refetchOnWindowFocus: false,
-      cacheTime: 60000,
+      staleTime: 60000,
     }
   );
 
@@ -30,7 +30,7 @@ export function useBookQuery(id: number) {
     },
     {
       refetchOnWindowFocus: false,
-      cacheTime: 90000,
+      staleTime: 90000,
     }
   );
 

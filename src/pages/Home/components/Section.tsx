@@ -30,13 +30,6 @@ const SectionContent = ({ scroll, type }: Props) => {
   const { data: quizzes, isLoading: isQuizzesLoading } = useQuizzesQuery();
   const { data: articles, isLoading: isArticlesLoading } = useArticlesQuery();
 
-  // useEffect(() => {
-  //   if (type === "persons") getPersons(6);
-  //   else if (type === "quiz") getQuizzes(4);
-  //   else if (type === "books") getBooks(6);
-  //   else if (type === "articles") getArticles(6);
-  // }, []);
-
   if (type === "books") {
     return (
       <ScrollContainer scroll={scroll}>

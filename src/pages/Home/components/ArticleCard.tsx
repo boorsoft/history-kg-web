@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import sanitizeHtml from 'sanitize-html'
+import sanitizeHtml from "sanitize-html";
 
 type Props = {
   title: string;
@@ -10,15 +10,17 @@ type Props = {
 };
 
 const ArticleCard = ({ title, text, route }: Props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <Container onClick={() => navigate(route)}>
       <div>
         <Title>{title}</Title>
-        <Text>{sanitizeHtml(text, {
-          allowedTags: []
-        })}</Text>
+        <Text>
+          {sanitizeHtml(text, {
+            allowedTags: [],
+          })}
+        </Text>
       </div>
     </Container>
   );
@@ -35,6 +37,7 @@ const Container = styled.div`
   background: var(--secondary-color);
   box-shadow: 0px 14px 55px -5px rgba(73, 55, 38, 0.05);
   border-radius: 15px;
+  cursor: default;
 `;
 
 const Title = styled.h1`
