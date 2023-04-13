@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { API_ARTICLES_URL } from "../constants/constants";
 import { Article } from "../types/entities";
+import { QUERY_KEYS } from "../constants/queryKeys";
 
 export function useArticlesQuery() {
   const { data, isFetching } = useQuery<Article[]>(
@@ -22,16 +23,19 @@ export function useArticlesQuery() {
 }
 
 export function useArticleQuery(id: number) {
-    const { data, isFetching } = useQuery<Article>([QUERY_KEYS.ARTICLE], () => {
+  const { data, isFetching } = useQuery<Article>(
+    [QUERY_KEYS.ARTICLE],
+    () => {
       return axios.get(`${API_ARTICLES_URL}/${id}`).then(({ data }) => data);
-    }, {
+    },
+    {
       refetchOnWindowFocus: false,
-      cacheTime: 90000
-    })
-  
-    return {
-      data,
-      isLoading: isFetching
+      cacheTime: 90000,
     }
-  }
-  
+  );
+
+  return {
+    data,
+    isLoading: isFetching,
+  };
+}

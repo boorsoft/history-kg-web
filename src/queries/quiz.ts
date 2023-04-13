@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { API_QUIZ_URL } from "../constants/constants";
 import { Quiz } from "../types/entities";
+import { QUERY_KEYS } from "../constants/queryKeys";
 
 export function useQuizzesQuery() {
   const { data, isFetching } = useQuery<Quiz[]>(
@@ -22,15 +23,19 @@ export function useQuizzesQuery() {
 }
 
 export function useQuizQuery(id: number) {
-  const { data, isFetching } = useQuery<Quiz>([QUERY_KEYS.QUIZ], () => {
-    return axios.get(`${API_QUIZ_URL}/${id}`).then(({ data }) => data);
-  }, {
-    refetchOnWindowFocus: false,
-    cacheTime: 90000
-  })
+  const { data, isFetching } = useQuery<Quiz>(
+    [QUERY_KEYS.QUIZ],
+    () => {
+      return axios.get(`${API_QUIZ_URL}/${id}`).then(({ data }) => data);
+    },
+    {
+      refetchOnWindowFocus: false,
+      cacheTime: 90000,
+    }
+  );
 
   return {
     data,
-    isLoading: isFetching
-  }
+    isLoading: isFetching,
+  };
 }

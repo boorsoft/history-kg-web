@@ -8,7 +8,7 @@ import Wrapper from "./components/Wrapper";
 import store from "./store/store";
 import "./index.css";
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 const App = () => {
   return (

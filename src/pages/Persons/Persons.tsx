@@ -1,41 +1,25 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { bindActionCreators } from "redux";
 import styled from "styled-components";
 import Header from "../../components/Header";
 
-import LoadingSpinner from "../../components/LoadingSpinner";
 import { ROUTES } from "../../constants/routes";
-import { fetchPersons } from "../../store/app/actionCreators";
-import { AppDispatch, RootState } from "../../store/store";
-import { Person } from "../../types/entities";
 
 import { Container } from "../Home/Home";
 import PersonCard from "./components/PersonCard";
+import { usePersonsCached } from "../../hooks/useCachedData";
+import { Person } from "../../types/entities";
 
 export const Persons: FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
-
-  const {
-    persons,
-    persons: { isLoading },
-  } = useSelector((state: RootState) => state.app);
-
-  const getPersons = bindActionCreators(fetchPersons, dispatch);
-
-  useEffect(() => {
-    getPersons();
-  }, []);
+  const persons = usePersonsCached();
 
   return (
     <>
       <Header title="Исторические личности" />
       <Container>
-        {isLoading && <LoadingSpinner />}
         <GridContainer>
-          {!isLoading &&
-            persons.data.map((person: Person) => (
+          {persons &&
+            persons.map((person: Person) => (
               <PersonCard
                 key={person.id}
                 person={person}

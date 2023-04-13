@@ -1,57 +1,45 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FC } from "react";
-import styled from 'styled-components';
-import parseHtml from 'html-react-parser';
+import styled from "styled-components";
+import parseHtml from "html-react-parser";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../store/store";
-import { bindActionCreators } from "redux";
 
-import { fetchPersonById } from '../../../store/app/actionCreators';
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import Header from "../../../components/Header";
+import { usePersonQuery } from "../../../queries/persons";
 
 const PersonPage: FC = () => {
-    const { id } = useParams()
-    const dispatch = useDispatch<AppDispatch>();
+  const { id } = useParams();
 
-    const { currentPerson, isLoading } = useSelector((state: RootState) => state.app.persons)
+  const { data: person, isLoading } = usePersonQuery(+id!);
 
-    const fetchPerson = bindActionCreators(fetchPersonById, dispatch);
-
-    useEffect(() => {
-        id && fetchPerson(+id);
-    }, [])
-
-    return (
-        <Wrapper>
-            <Header title={currentPerson?.firstName + ' ' + currentPerson?.lastName} />
-            <Container>
-                {isLoading && <LoadingSpinner />}
-                <Text>
-                    {!isLoading && currentPerson && parseHtml(currentPerson.bio)}
-                </Text>
-            </Container>
-        </Wrapper>
-    )
-}
+  return (
+    <Wrapper>
+      <Header title={person?.firstName + " " + person?.lastName} />
+      <Container>
+        {isLoading && <LoadingSpinner />}
+        <Text>{!isLoading && person && parseHtml(person.bio)}</Text>
+      </Container>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div`
-    display: flex;
-    justify-content: center;
-`
+  display: flex;
+  justify-content: center;
+`;
 
 const Container = styled.div`
-    margin-top: 120px;
-    padding: 20px;
-    width: 100%;
-`
+  margin-top: 120px;
+  padding: 20px;
+  width: 100%;
+`;
 
 const Text = styled.div`
-    margin: auto;
-    max-width: 500px;
-    text-align: justify;
-    line-height: 25px;
-`
+  margin: auto;
+  max-width: 500px;
+  text-align: justify;
+  line-height: 25px;
+`;
 
 export default PersonPage;

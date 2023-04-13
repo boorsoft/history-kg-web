@@ -1,30 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { bindActionCreators } from "redux";
 import styled from "styled-components";
+
 import Header from "../../components/Header";
-
 import LoadingSpinner from "../../components/LoadingSpinner";
-import { fetchQuizById } from "../../store/app/actionCreators";
-import { AppDispatch, RootState } from "../../store/store";
-import { Answer } from "../../types/entities";
 import { Container } from "../Home/Home";
-
 import AnswerCard from "./components/AnswerCard";
 import QuestionCard from "./components/QuestionCard";
 import QuizButton from "./components/QuizButton";
 import QuizFinishPopup from "./components/QuizFinishPopup";
 
+import { Answer } from "../../types/entities";
+
+import { useQuizQuery } from "../../queries/quiz";
+
 const QuizPage: FC = () => {
   const { id } = useParams();
 
-  const dispatch = useDispatch<AppDispatch>();
+  const { data: currentQuiz, isLoading } = useQuizQuery(+id!);
 
-  const { currentQuiz, isLoading } = useSelector(
-    (state: RootState) => state.app.quizzes
-  );
   const questions = currentQuiz?.questions;
 
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
@@ -36,12 +31,6 @@ const QuizPage: FC = () => {
     useState(false);
   const [selectedAnswers, setSelectedAnswers] = useState<Answer[]>([]);
   const [confirmed, setConfirmed] = useState(false);
-
-  const fetchQuiz = bindActionCreators(fetchQuizById, dispatch);
-
-  useEffect(() => {
-    id && fetchQuiz(+id);
-  }, []);
 
   useEffect(() => {
     setHasMultipleCorrectAnswers(checkIfHasMultipleCorrectAnswers());

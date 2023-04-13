@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { API_BOOKS_URL } from "../constants/constants";
 import { Book } from "../types/entities";
+import { QUERY_KEYS } from "../constants/queryKeys";
 
 export function useBooksQuery() {
   const { data, isFetching } = useQuery<Book[]>(
@@ -22,15 +23,19 @@ export function useBooksQuery() {
 }
 
 export function useBookQuery(id: number) {
-  const { data, isFetching } = useQuery<Book>([QUERY_KEYS.BOOK], () => {
-    return axios.get(`${API_BOOKS_URL}/${id}`).then(({ data }) => data);
-  }, {
-    refetchOnWindowFocus: false,
-    cacheTime: 90000
-  })
+  const { data, isFetching } = useQuery<Book>(
+    [QUERY_KEYS.BOOK],
+    () => {
+      return axios.get(`${API_BOOKS_URL}/${id}`).then(({ data }) => data);
+    },
+    {
+      refetchOnWindowFocus: false,
+      cacheTime: 90000,
+    }
+  );
 
   return {
     data,
-    isLoading: isFetching
-  }
+    isLoading: isFetching,
+  };
 }
