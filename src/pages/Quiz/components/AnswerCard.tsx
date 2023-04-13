@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FC } from "react";
 import styled from "styled-components";
 import { BiRadioCircleMarked } from "react-icons/bi";
-import { Answer } from "../../../types/store/AppState";
+import { Answer } from "../../../types/entities";
 
 type Props = {
   answer: Answer;
@@ -24,7 +24,7 @@ const AnswerCard: FC<Props> = ({
 
   useEffect(() => {
     setSelected(false);
-  }, [])
+  }, []);
 
   return (
     <Card
@@ -84,20 +84,22 @@ const Card = styled.div<{
         if (selected) {
           return isCorrect ? `var(--correct-color)` : `var(--wrong-color)`;
         } else {
-          return isCorrect ? `var(--secondary-correct-color)` : `var(--primary-color)`;
+          return isCorrect
+            ? `var(--secondary-correct-color)`
+            : `var(--primary-color)`;
         }
-      } 
+      }
     }
   }};
   border-width: 1px;
   border-color: var(--accent-color);
-  border-style: ${({isClicked, hasMultipleCorrectAnswers, selected}) => {
+  border-style: ${({ isClicked, hasMultipleCorrectAnswers, selected }) => {
     if (hasMultipleCorrectAnswers) {
       if (isClicked) {
-        return selected ? 'solid' : '';
-      } 
+        return selected ? "solid" : "";
+      }
     }
-}};
+  }};
   box-shadow: 8px 4px 24px rgba(70, 68, 170, 0.1);
   border-radius: 18px;
   cursor: pointer;

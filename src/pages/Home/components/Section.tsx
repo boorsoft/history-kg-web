@@ -1,18 +1,9 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { bindActionCreators } from "redux";
 import { MdArrowForwardIos } from "react-icons/md";
 import styled from "styled-components";
 
 import { ROUTES } from "../../../constants/routes";
-import {
-  fetchArticles,
-  fetchBooks,
-  fetchPersons,
-  fetchQuizzes,
-} from "../../../store/app/actionCreators";
-import { AppDispatch, RootState } from "../../../store/store";
-import { Article, Book, Person, Quiz } from "../../../types/store/AppState";
+import { Article, Book, Person, Quiz } from "../../../types/entities";
 
 import PersonCard from "../../Persons/components/PersonCard";
 import BookCard from "./BookCard";
@@ -20,6 +11,11 @@ import QuizCard from "../../Quiz/components/QuizCard";
 import { useNavigate } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
 import LoadingSpinner from "../../../components/LoadingSpinner";
+
+import { useBooksQuery } from "../../../queries/books";
+import { usePersonsQuery } from "../../../queries/persons";
+import { useArticlesQuery } from "../../../queries/articles";
+import { useQuizzesQuery } from "../../../queries/quiz";
 
 type Props = {
   title: string;
@@ -29,30 +25,25 @@ type Props = {
 };
 
 const SectionContent = ({ scroll, type }: Props) => {
-  const dispatch = useDispatch<AppDispatch>();
+  const { data: books, isLoading: isBooksLoading } = useBooksQuery();
+  const { data: persons, isLoading: isPersonsLoading } = usePersonsQuery();
+  const { data: quizzes, isLoading: isQuizzesLoading } = useQuizzesQuery();
+  const { data: articles, isLoading: isArticlesLoading } = useArticlesQuery();
 
-  const { persons, quizzes, books, articles } = useSelector(
-    (state: RootState) => state.app
-  );
-
-  const getBooks = bindActionCreators(fetchBooks, dispatch);
-  const getQuizzes = bindActionCreators(fetchQuizzes, dispatch);
-  const getPersons = bindActionCreators(fetchPersons, dispatch);
-  const getArticles = bindActionCreators(fetchArticles, dispatch);
-
-  useEffect(() => {
-    if (type === "persons") getPersons(6);
-    else if (type === "quiz") getQuizzes(4);
-    else if (type === "books") getBooks(6);
-    else if (type === "articles") getArticles(6);
-  }, []);
+  // useEffect(() => {
+  //   if (type === "persons") getPersons(6);
+  //   else if (type === "quiz") getQuizzes(4);
+  //   else if (type === "books") getBooks(6);
+  //   else if (type === "articles") getArticles(6);
+  // }, []);
 
   if (type === "books") {
     return (
       <ScrollContainer scroll={scroll}>
-        {books.isLoading && <LoadingSpinner />}
-        {!books.isLoading &&
-          books.data.map((book: Book) => (
+        {isBooksLoading && <LoadingSpinner />}
+        {!isBooksLoading &&
+          books &&
+          books.map((book: Book) => (
             <BookCard
               key={book.id}
               title={book.title}
@@ -66,9 +57,10 @@ const SectionContent = ({ scroll, type }: Props) => {
   } else if (type === "persons") {
     return (
       <ScrollContainer scroll={scroll}>
-        {persons.isLoading && <LoadingSpinner />}
-        {!persons.isLoading &&
-          persons.data.map((person: Person) => (
+        {isPersonsLoading && <LoadingSpinner />}
+        {!isPersonsLoading &&
+          persons &&
+          persons.map((person: Person) => (
             <PersonCard
               key={person.id}
               person={person}
@@ -80,9 +72,10 @@ const SectionContent = ({ scroll, type }: Props) => {
   } else if (type === "quiz") {
     return (
       <ScrollContainer scroll={scroll}>
-        {quizzes.isLoading && <LoadingSpinner />}
-        {!quizzes.isLoading &&
-          quizzes.data.map((quiz: Quiz) => (
+        {isQuizzesLoading && <LoadingSpinner />}
+        {!isQuizzesLoading &&
+          quizzes &&
+          quizzes.map((quiz: Quiz) => (
             <QuizCard
               key={quiz.id}
               quiz={quiz}
@@ -94,9 +87,10 @@ const SectionContent = ({ scroll, type }: Props) => {
   } else if (type === "articles") {
     return (
       <ScrollContainer scroll={scroll}>
-        {articles.isLoading && <LoadingSpinner />}
-        {!articles.isLoading &&
-          articles.data.map((article: Article) => (
+        {isArticlesLoading && <LoadingSpinner />}
+        {!isArticlesLoading &&
+          articles &&
+          articles.map((article: Article) => (
             <ArticleCard
               title={article.title}
               text={article.text}
@@ -111,17 +105,17 @@ const SectionContent = ({ scroll, type }: Props) => {
   }
 };
 
-const Section = ({ scroll, title, type, route}: Props) => {
+const Section = ({ scroll, title, type, route }: Props) => {
   const navigate = useNavigate();
 
   return (
     <Container>
       <SectionHeader>
         <SectionTitle>{title}</SectionTitle>
-          <ViewAllButton onClick={() => navigate(route)}>
-            <ViewAllButtonText>Показать все</ViewAllButtonText>
-            <ViewAllButtonIcon />
-          </ViewAllButton>
+        <ViewAllButton onClick={() => navigate(route)}>
+          <ViewAllButtonText>Показать все</ViewAllButtonText>
+          <ViewAllButtonIcon />
+        </ViewAllButton>
       </SectionHeader>
       <SectionContent scroll={scroll} type={type} title={title} route={route} />
     </Container>

@@ -7,7 +7,7 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import { ROUTES } from "../../constants/routes";
 import { fetchQuizzes } from "../../store/app/actionCreators";
 import { AppDispatch, RootState } from "../../store/store";
-import { Quiz } from "../../types/store/AppState";
+import { Quiz } from "../../types/entities";
 import { Container } from "../Home/Home";
 import QuizCard from "./components/QuizCard";
 

@@ -9,7 +9,7 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import { ROUTES } from "../../constants/routes";
 import { fetchPersons } from "../../store/app/actionCreators";
 import { AppDispatch, RootState } from "../../store/store";
-import { Person } from "../../types/store/AppState";
+import { Person } from "../../types/entities";
 
 import { Container } from "../Home/Home";
 import PersonCard from "./components/PersonCard";

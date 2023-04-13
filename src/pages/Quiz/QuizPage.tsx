@@ -9,7 +9,7 @@ import Header from "../../components/Header";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import { fetchQuizById } from "../../store/app/actionCreators";
 import { AppDispatch, RootState } from "../../store/store";
-import { Answer } from "../../types/store/AppState";
+import { Answer } from "../../types/entities";
 import { Container } from "../Home/Home";
 
 import AnswerCard from "./components/AnswerCard";
@@ -41,7 +41,7 @@ const QuizPage: FC = () => {
 
   useEffect(() => {
     id && fetchQuiz(+id);
-  }, [])
+  }, []);
 
   useEffect(() => {
     setHasMultipleCorrectAnswers(checkIfHasMultipleCorrectAnswers());
@@ -112,49 +112,50 @@ const QuizPage: FC = () => {
 
   return (
     <>
-    <Header title="Тестирование" />
-    <Container>
-      {isLoading && <LoadingSpinner />}
-      {!isLoading && currentQuiz && questions && (
-        <>
-          <QuestionCard
-            question={questions[currentQuestionIdx]}
-            quizLengthText={`${currentQuestionIdx + 1}/${questions.length}`}
-          />
-          <AnswersContainer>
-            {questions[currentQuestionIdx].answers.map((answer: Answer) => (
-              <AnswerCard
-                key={answer.id}
-                answer={answer}
-                confirmed={confirmed}
-                hasMultipleCorrectAnswers={hasMultipleCorrectAnswers}
-                onClick={() => onAnswerClick(answer)}
-                disabled={answersDisabled}
-              />
-            ))}
-          </AnswersContainer>
-          {isButtonActive &&
-            (questions && currentQuestionIdx < questions.length - 1 ? (
-              confirmed ? (
-                <QuizButton text="Дальше" onClick={nextQuestion} />
+      <Header title="Тестирование" />
+      <Container>
+        {isLoading && <LoadingSpinner />}
+        {!isLoading && currentQuiz && questions && (
+          <>
+            <QuestionCard
+              question={questions[currentQuestionIdx]}
+              quizLengthText={`${currentQuestionIdx + 1}/${questions.length}`}
+            />
+            <AnswersContainer>
+              {questions[currentQuestionIdx].answers.map((answer: Answer) => (
+                <AnswerCard
+                  key={answer.id}
+                  answer={answer}
+                  confirmed={confirmed}
+                  hasMultipleCorrectAnswers={hasMultipleCorrectAnswers}
+                  onClick={() => onAnswerClick(answer)}
+                  disabled={answersDisabled}
+                />
+              ))}
+            </AnswersContainer>
+            {isButtonActive &&
+              (questions && currentQuestionIdx < questions.length - 1 ? (
+                confirmed ? (
+                  <QuizButton text="Дальше" onClick={nextQuestion} />
+                ) : (
+                  <QuizButton text="Подтвердить" onClick={confirm} />
+                )
+              ) : confirmed ? (
+                <QuizButton text="Завершить" onClick={finishQuiz} />
               ) : (
                 <QuizButton text="Подтвердить" onClick={confirm} />
-              )
-            ) : confirmed ? (
-              <QuizButton text="Завершить" onClick={finishQuiz} />
-            ) : (
-              <QuizButton text="Подтвердить" onClick={confirm} />
-            ))}
-          {quizFinished && (
-            <QuizFinishPopup
-              correctAnswersCount={correctAnswersCount}
-              quizLength={questions.length}
-            />
-          )}
-        </>
-      )}
-    </Container>
-    </>);
+              ))}
+            {quizFinished && (
+              <QuizFinishPopup
+                correctAnswersCount={correctAnswersCount}
+                quizLength={questions.length}
+              />
+            )}
+          </>
+        )}
+      </Container>
+    </>
+  );
 };
 
 const AnswersContainer = styled.div`

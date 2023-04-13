@@ -8,7 +8,7 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import { ROUTES } from "../../constants/routes";
 import { fetchArticles, fetchBooks } from "../../store/app/actionCreators";
 import { AppDispatch, RootState } from "../../store/store";
-import { Article, Book } from "../../types/store/AppState";
+import { Article, Book } from "../../types/entities";
 import BooksList from "../Admin/components/Book/BooksList";
 import ArticleCard from "../Home/components/ArticleCard";
 import BookCard from "../Home/components/BookCard";
