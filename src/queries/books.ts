@@ -24,7 +24,7 @@ export function useBooksQuery() {
 
 export function useBookQuery(id: number) {
   const { data, isFetching } = useQuery<Book>(
-    [QUERY_KEYS.BOOK],
+    [QUERY_KEYS.BOOK, id],
     () => {
       return axios.get(`${API_BOOKS_URL}/${id}`).then(({ data }) => data);
     },

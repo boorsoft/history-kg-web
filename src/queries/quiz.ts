@@ -24,7 +24,7 @@ export function useQuizzesQuery() {
 
 export function useQuizQuery(id: number) {
   const { data, isFetching } = useQuery<Quiz>(
-    [QUERY_KEYS.QUIZ],
+    [QUERY_KEYS.QUIZ, id],
     () => {
       return axios.get(`${API_QUIZ_URL}/${id}`).then(({ data }) => data);
     },

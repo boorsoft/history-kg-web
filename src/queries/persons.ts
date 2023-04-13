@@ -24,7 +24,7 @@ export function usePersonsQuery() {
 
 export function usePersonQuery(id: number) {
   const { data, isFetching } = useQuery<Person>(
-    [QUERY_KEYS.PERSON],
+    [QUERY_KEYS.PERSON, id],
     () => {
       return axios.get(`${API_PERSONS_URL}/${id}`).then(({ data }) => data);
     },

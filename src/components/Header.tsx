@@ -30,6 +30,7 @@ const StyledHeader = styled.div`
   height: 120px;
   padding: 0 20px;
   background-color: var(--accent-color);
+  box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.07);
 
   @media screen and (min-width: 600px) {
     flex-direction: row;
@@ -51,14 +52,13 @@ const Title = styled.div<{ isHome?: boolean }>`
   font-weight: 800;
   letter-spacing: 1px;
   text-align: ${({ isHome }) => (isHome ? "center" : "left")};
-  flex: 5;
 `;
 
 const Icon = styled(BsArrowLeft)`
   color: var(--heading-text-color);
-  font-size: 27px;
+  font-size: 22px;
   cursor: pointer;
-  margin: 0 20px;
+  margin-right: 20px;
   flex: 1;
 `;
 

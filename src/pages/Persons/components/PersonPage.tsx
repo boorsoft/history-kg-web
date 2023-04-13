@@ -15,7 +15,7 @@ const PersonPage: FC = () => {
 
   return (
     <Wrapper>
-      <Header title={person?.firstName + " " + person?.lastName} />
+      <Header title={person ? person.firstName + " " + person.lastName : ""} />
       <Container>
         {isLoading && <LoadingSpinner />}
         <Text>{!isLoading && person && parseHtml(person.bio)}</Text>

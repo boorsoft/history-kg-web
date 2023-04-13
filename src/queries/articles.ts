@@ -24,7 +24,7 @@ export function useArticlesQuery() {
 
 export function useArticleQuery(id: number) {
   const { data, isFetching } = useQuery<Article>(
-    [QUERY_KEYS.ARTICLE],
+    [QUERY_KEYS.ARTICLE, id],
     () => {
       return axios.get(`${API_ARTICLES_URL}/${id}`).then(({ data }) => data);
     },

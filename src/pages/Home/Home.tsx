@@ -41,7 +41,6 @@ const Home = () => {
 
 export const Container = styled.div`
   background-color: var(--primary-color);
-  padding: 0 25%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,6 +50,7 @@ export const Container = styled.div`
   padding-top: 150px;
 
   @media screen and (min-width: 600px) {
+    padding: 0 25%;
     padding-top: 100px;
   }
 `;
