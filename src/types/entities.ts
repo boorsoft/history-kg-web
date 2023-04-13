@@ -37,26 +37,3 @@ export interface Article {
     title: string;
     text: string;
 }
-
-export interface AppState {
-    books: {
-        data: Book[];
-        isLoading: boolean;
-        currentBook?: Book;
-    };
-    persons: {
-        data: Person[];
-        isLoading: boolean;
-        currentPerson?: Person;
-    }
-    quizzes: {
-        data: Quiz[];
-        isLoading: boolean;
-        currentQuiz?: Quiz;
-    },
-    articles: {
-        data: Article[];
-        isLoading: boolean;
-        currentArticle?: Article;
-    }
-}

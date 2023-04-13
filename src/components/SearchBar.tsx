@@ -21,8 +21,8 @@ const SearchBar = () => {
   const debounced = useDebouncedCallback(() => {
     setIsLoading(true);
     setCanDisplayResults(true);
-    setSearchResults([])
-    
+    setSearchResults([]);
+
     if (searchValue) {
       search(searchValue.trim()).then((res) => {
         setSearchResults(res.data);
@@ -85,9 +85,8 @@ const SearchIcon = styled(BiSearch)`
 
 const SearchContainer = styled.div`
   width: clamp(330px, 90vw, 400px);
-  height: 42px;
   background-color: var(--secondary-accent-color);
-  padding: 10px 24px;
+  padding: 6px 24px;
   border-radius: 25px;
 `;
 

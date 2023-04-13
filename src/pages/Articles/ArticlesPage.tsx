@@ -1,42 +1,26 @@
-import React, { FC, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { bindActionCreators } from "redux";
+import React, { FC } from "react";
 import styled from "styled-components";
 
 import Header from "../../components/Header";
 import LoadingSpinner from "../../components/LoadingSpinner";
-import { ROUTES } from "../../constants/routes";
-import { fetchArticles, fetchBooks } from "../../store/app/actionCreators";
-import { AppDispatch, RootState } from "../../store/store";
-import { Article, Book } from "../../types/store/AppState";
-import BooksList from "../Admin/components/Book/BooksList";
+import { Article } from "../../types/entities";
 import ArticleCard from "../Home/components/ArticleCard";
-import BookCard from "../Home/components/BookCard";
 import { Container } from "../Home/Home";
 
+import { ROUTES } from "../../constants/routes";
+import { useArticlesCached } from "../../hooks/useCachedData";
+
 const ArticlesPage: FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
-
-  const {
-    articles,
-    articles: { isLoading },
-  } = useSelector((state: RootState) => state.app);
-
-  const getArticles = bindActionCreators(fetchArticles, dispatch);
-
-  useEffect(() => {
-    getArticles();
-  }, []);
+  const articles = useArticlesCached();
 
   return (
     <>
       <Header title="Статьи" />
       <Container>
-        {isLoading && <LoadingSpinner />}
+        {/* {isLoading && <LoadingSpinner />} */}
         <GridContainer>
           {articles &&
-            !isLoading &&
-            articles.data.map((article: Article) => (
+            articles.map((article: Article) => (
               <ArticleCard
                 key={article.id}
                 title={article.title}

@@ -10,13 +10,32 @@ const Home = () => {
     <>
       <Header title="История кыргызстана" isHome />
       <Container>
-        <Section title="Книги" scroll="horizontal" type="books" route={ROUTES.BOOKS} />
-        <Section title="Исторические личности" scroll="horizontal" type="persons" route={ROUTES.PERSONS} />
-        <Section title="Тестирование" scroll="vertical" type="quiz" route={ROUTES.QUIZ} />
-        <Section title="Статьи" scroll="horizontal" type="articles" route={ROUTES.ARTICLES} />
+        <Section
+          title="Книги"
+          scroll="horizontal"
+          type="books"
+          route={ROUTES.BOOKS}
+        />
+        <Section
+          title="Исторические личности"
+          scroll="horizontal"
+          type="persons"
+          route={ROUTES.PERSONS}
+        />
+        <Section
+          title="Тестирование"
+          scroll="vertical"
+          type="quiz"
+          route={ROUTES.QUIZ}
+        />
+        <Section
+          title="Статьи"
+          scroll="horizontal"
+          type="articles"
+          route={ROUTES.ARTICLES}
+        />
       </Container>
     </>
-    
   );
 };
 
@@ -31,6 +50,7 @@ export const Container = styled.div`
   padding-top: 150px;
 
   @media screen and (min-width: 600px) {
+    padding: 0 25%;
     padding-top: 100px;
   }
 `;

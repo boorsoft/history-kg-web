@@ -1,5 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createGlobalStyle } from "styled-components";
 
 import RootRouter from "./router/RootRouter";
@@ -7,15 +8,19 @@ import Wrapper from "./components/Wrapper";
 import store from "./store/store";
 import "./index.css";
 
+export const queryClient = new QueryClient();
+
 const App = () => {
   return (
     <Provider store={store}>
-      <div className="App">
-        <Wrapper>
-          <GlobalStyles />
-          <RootRouter />
-        </Wrapper>
-      </div>
+      <QueryClientProvider client={queryClient}>
+        <div className="App">
+          <Wrapper>
+            <GlobalStyles />
+            <RootRouter />
+          </Wrapper>
+        </div>
+      </QueryClientProvider>
     </Provider>
   );
 };

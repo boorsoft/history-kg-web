@@ -1,38 +1,24 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { bindActionCreators } from "redux";
 import styled from "styled-components";
 import parseHtml from "html-react-parser";
-import { AppDispatch, RootState } from "../../store/store";
-import { fetchArticleById } from "../../store/app/actionCreators";
 import Header from "../../components/Header";
 import LoadingSpinner from "../../components/LoadingSpinner";
+
+import { useArticleQuery } from "../../queries/articles";
 
 const SingleArticlePage: FC = () => {
   const { id } = useParams();
 
-  const dispatch = useDispatch<AppDispatch>();
-
-  const { currentArticle, isLoading } = useSelector(
-    (state: RootState) => state.app.articles
-  );
-
-  const getArticle = bindActionCreators(fetchArticleById, dispatch);
-
-  useEffect(() => {
-    id && getArticle(+id);
-  }, []);
+  const { data: article, isLoading } = useArticleQuery(+id!);
 
   return (
     <Wrapper>
-      <Header title={currentArticle?.title || ""} />
+      <Header title={article?.title || ""} />
       <Container>
         {isLoading && <LoadingSpinner />}
-        <Text>
-          {!isLoading && currentArticle && parseHtml(currentArticle.text)}
-        </Text>
+        <Text>{!isLoading && article && parseHtml(article.text)}</Text>
       </Container>
     </Wrapper>
   );
@@ -46,7 +32,6 @@ const Wrapper = styled.div`
 const Container = styled.div`
   margin-top: 120px;
   padding: 20px;
-  /* width: clamp(350px, 90vw, 500px); */
   width: 100%;
 
   @media screen and (min-width: 600px) {

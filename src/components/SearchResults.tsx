@@ -39,19 +39,19 @@ const SearchResults: FC<Props> = ({ results, isLoading }) => {
 };
 
 const Container = styled.div<{ isLoading: boolean; isNoResults: boolean }>`
-  top: 7px;
-  left: -24px;
+  top: 49px;
+  right: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: ${({ isLoading, isNoResults }) =>
     isLoading || isNoResults ? "center" : "flex-start"};
-  position: relative;
-  z-index: 20;
+  position: absolute;
+  z-index: 10;
   background-color: var(--secondary-color);
   border-radius: 15px;
   width: clamp(330px, 90vw, 400px);
-  min-height: 120px;
+  min-height: 100px;
   max-height: 1050px;
 
   &:nth-child(1) &:last-child {
@@ -67,7 +67,7 @@ const ResultCard = styled.div`
   justify-content: center;
   align-items: flex-start;
   width: 100%;
-  height: 70px;
+  height: 60px;
   padding: 10px 20px;
 
   transition: background 0.3s ease-in;
@@ -96,6 +96,6 @@ const NotFoundText = styled.div`
   text-align: center;
   font-weight: 400;
   font-size: 14px;
-`
+`;
 
 export default SearchResults;

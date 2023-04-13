@@ -1,5 +1,4 @@
 import React, { ReactElement, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Worker, Viewer } from "@react-pdf-viewer/core";
 import { zoomPlugin } from "@react-pdf-viewer/zoom";
 import {
@@ -14,23 +13,15 @@ import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/zoom/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 
-import { AppDispatch, RootState } from "../../store/store";
 import { BASE_URL } from "../../constants/constants";
-import { bindActionCreators } from "redux";
-import { fetchBookById } from "../../store/app/actionCreators";
 import { useParams } from "react-router-dom";
+import { useBookQuery } from "../../queries/books";
 
 const PDFViewer = () => {
-  const dispatch = useDispatch<AppDispatch>();
-
   const { id } = useParams();
 
-  const { currentBook, isLoading } = useSelector(
-    (state: RootState) => state.app.books
-  );
-  const book = currentBook;
+  const { data: book, isLoading } = useBookQuery(+id!);
 
-  const getBook = bindActionCreators(fetchBookById, dispatch);
   const renderToolbar = (Toolbar: (props: ToolbarProps) => ReactElement) => (
     <Toolbar>
       {(slots: ToolbarSlot) => {
@@ -101,11 +92,6 @@ const PDFViewer = () => {
     sidebarTabs: () => [],
     renderToolbar,
   });
-
-  useEffect(() => {
-    id && getBook(+id);
-    if (!isLoading) console.log(`${BASE_URL}/books/${book?.fileName}`);
-  }, [isLoading]);
 
   return (
     <Wrapper>

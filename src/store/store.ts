@@ -3,12 +3,10 @@ import thunk from "redux-thunk";
 
 import reducers from "./reducers";
 import { initialState as authState } from "./auth/reducer";
-import { initialState as appState } from "./app/reducer";
 import { configureStore } from "@reduxjs/toolkit";
 
 const rootState = {
   auth: authState,
-  app: appState,
 };
 
 const middlewares = [thunk];

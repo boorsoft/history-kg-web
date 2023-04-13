@@ -10,7 +10,7 @@ type Props = {
 };
 
 const BookCard = ({ title, author, cityAndYear, route }: Props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <Container onClick={() => navigate(route)}>
@@ -36,6 +36,7 @@ const Container = styled.div`
   background: var(--secondary-color);
   box-shadow: 0px 14px 55px -5px rgba(73, 55, 38, 0.05);
   border-radius: 15px;
+  cursor: default;
 `;
 
 const Title = styled.h1`
