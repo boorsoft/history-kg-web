@@ -4,11 +4,21 @@ import { API_ARTICLES_URL } from "../constants/constants";
 import { Article } from "../types/entities";
 import { QUERY_KEYS } from "../constants/queryKeys";
 
-export function useArticlesQuery() {
+interface ArticlesQueryProps {
+  params?: {
+    limit?: number;
+  };
+}
+
+export function useArticlesQuery(queryParams?: ArticlesQueryProps) {
   const { data, isFetching } = useQuery<Article[]>(
-    [QUERY_KEYS.ARTICLES],
+    [QUERY_KEYS.ARTICLES, queryParams?.params?.limit],
     () => {
-      return axios.get(API_ARTICLES_URL).then(({ data }) => data);
+      return axios
+        .get(API_ARTICLES_URL, {
+          params: { limit: queryParams?.params?.limit },
+        })
+        .then(({ data }) => data);
     },
     {
       refetchOnWindowFocus: false,

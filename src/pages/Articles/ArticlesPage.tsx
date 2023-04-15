@@ -8,18 +8,19 @@ import ArticleCard from "../Home/components/ArticleCard";
 import { Container } from "../Home/Home";
 
 import { ROUTES } from "../../constants/routes";
-import { useArticlesCached } from "../../hooks/useCachedData";
+import { useArticlesQuery } from "../../queries/articles";
 
 const ArticlesPage: FC = () => {
-  const articles = useArticlesCached();
+  const { data: articles, isLoading } = useArticlesQuery();
 
   return (
     <>
       <Header title="Статьи" />
       <Container>
-        {/* {isLoading && <LoadingSpinner />} */}
+        {isLoading && <LoadingSpinner />}
         <GridContainer>
           {articles &&
+            !isLoading &&
             articles.map((article: Article) => (
               <ArticleCard
                 key={article.id}

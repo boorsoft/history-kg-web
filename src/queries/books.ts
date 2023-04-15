@@ -4,11 +4,19 @@ import { API_BOOKS_URL } from "../constants/constants";
 import { Book } from "../types/entities";
 import { QUERY_KEYS } from "../constants/queryKeys";
 
-export function useBooksQuery() {
+interface BooksQueryProps {
+  params?: {
+    limit?: number;
+  };
+}
+
+export function useBooksQuery(queryParams?: BooksQueryProps) {
   const { data, isFetching } = useQuery<Book[]>(
-    [QUERY_KEYS.BOOKS],
+    [QUERY_KEYS.BOOKS, queryParams?.params?.limit],
     () => {
-      return axios.get(API_BOOKS_URL).then(({ data }) => data);
+      return axios
+        .get(API_BOOKS_URL, { params: { limit: queryParams?.params?.limit } })
+        .then(({ data }) => data);
     },
     {
       refetchOnWindowFocus: false,

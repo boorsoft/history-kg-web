@@ -4,11 +4,19 @@ import { API_QUIZ_URL } from "../constants/constants";
 import { Quiz } from "../types/entities";
 import { QUERY_KEYS } from "../constants/queryKeys";
 
-export function useQuizzesQuery() {
+interface QuizzesQueryProps {
+  params?: {
+    limit?: number;
+  };
+}
+
+export function useQuizzesQuery(queryParams?: QuizzesQueryProps) {
   const { data, isFetching } = useQuery<Quiz[]>(
-    [QUERY_KEYS.QUIZZES],
+    [QUERY_KEYS.QUIZZES, queryParams?.params?.limit],
     () => {
-      return axios.get(API_QUIZ_URL).then(({ data }) => data);
+      return axios
+        .get(API_QUIZ_URL, { params: { limit: queryParams?.params?.limit } })
+        .then(({ data }) => data);
     },
     {
       refetchOnWindowFocus: false,

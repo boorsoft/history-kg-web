@@ -25,10 +25,18 @@ type Props = {
 };
 
 const SectionContent = ({ scroll, type }: Props) => {
-  const { data: books, isLoading: isBooksLoading } = useBooksQuery();
-  const { data: persons, isLoading: isPersonsLoading } = usePersonsQuery();
-  const { data: quizzes, isLoading: isQuizzesLoading } = useQuizzesQuery();
-  const { data: articles, isLoading: isArticlesLoading } = useArticlesQuery();
+  const { data: books, isLoading: isBooksLoading } = useBooksQuery({
+    params: { limit: 5 },
+  });
+  const { data: persons, isLoading: isPersonsLoading } = usePersonsQuery({
+    params: { limit: 5 },
+  });
+  const { data: quizzes, isLoading: isQuizzesLoading } = useQuizzesQuery({
+    params: { limit: 5 },
+  });
+  const { data: articles, isLoading: isArticlesLoading } = useArticlesQuery({
+    params: { limit: 5 },
+  });
 
   if (type === "books") {
     return (

@@ -4,11 +4,19 @@ import { API_PERSONS_URL } from "../constants/constants";
 import { Person } from "../types/entities";
 import { QUERY_KEYS } from "../constants/queryKeys";
 
-export function usePersonsQuery() {
+interface PersonsQueryProps {
+  params?: {
+    limit?: number;
+  };
+}
+
+export function usePersonsQuery(queryParams?: PersonsQueryProps) {
   const { data, isFetching } = useQuery<Person[]>(
-    [QUERY_KEYS.PERSONS],
+    [QUERY_KEYS.PERSONS, queryParams?.params?.limit],
     () => {
-      return axios.get(API_PERSONS_URL).then(({ data }) => data);
+      return axios
+        .get(API_PERSONS_URL, { params: { limit: queryParams?.params?.limit } })
+        .then(({ data }) => data);
     },
     {
       refetchOnWindowFocus: false,

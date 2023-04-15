@@ -6,16 +6,18 @@ import { ROUTES } from "../../constants/routes";
 import { Quiz } from "../../types/entities";
 import { Container } from "../Home/Home";
 import QuizCard from "./components/QuizCard";
-import { useQuizzesCached } from "../../hooks/useCachedData";
+import { useQuizzesQuery } from "../../queries/quiz";
 
 const QuizMenu: FC = () => {
-  const quizzes = useQuizzesCached();
+  const { data: quizzes, isLoading } = useQuizzesQuery();
 
   return (
     <>
       <Header title="Тестирование" />
       <Container>
-        {quizzes &&
+        {isLoading && <LoadingSpinner />}
+        {!isLoading &&
+          quizzes &&
           quizzes.map((quiz: Quiz) => (
             <QuizCard
               key={quiz.id}

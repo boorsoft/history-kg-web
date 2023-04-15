@@ -7,18 +7,19 @@ import { ROUTES } from "../../constants/routes";
 import { Book } from "../../types/entities";
 import BookCard from "../Home/components/BookCard";
 import { Container } from "../Home/Home";
-import { useBooksCached } from "../../hooks/useCachedData";
+import { useBooksQuery } from "../../queries/books";
 
 const BooksPage: FC = () => {
-  const books = useBooksCached();
+  const { data: books, isLoading } = useBooksQuery();
 
   return (
     <>
       <Header title="Книги" />
       <Container>
-        {/* {isLoading && <LoadingSpinner />} */}
+        {isLoading && <LoadingSpinner />}
         <GridContainer>
-          {books &&
+          {!isLoading &&
+            books &&
             books.map((book: Book) => (
               <BookCard
                 key={book.id}

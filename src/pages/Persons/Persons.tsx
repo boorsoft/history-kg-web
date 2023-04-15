@@ -7,18 +7,22 @@ import { ROUTES } from "../../constants/routes";
 
 import { Container } from "../Home/Home";
 import PersonCard from "./components/PersonCard";
-import { usePersonsCached } from "../../hooks/useCachedData";
 import { Person } from "../../types/entities";
+import LoadingSpinner from "../../components/LoadingSpinner";
+
+import { usePersonsQuery } from "../../queries/persons";
 
 export const Persons: FC = () => {
-  const persons = usePersonsCached();
+  const { data: persons, isLoading } = usePersonsQuery();
 
   return (
     <>
       <Header title="Исторические личности" />
       <Container>
         <GridContainer>
-          {persons &&
+          {isLoading && <LoadingSpinner />}
+          {!isLoading &&
+            persons &&
             persons.map((person: Person) => (
               <PersonCard
                 key={person.id}
@@ -34,8 +38,12 @@ export const Persons: FC = () => {
 
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: clamp(15px, 5vw, 40px);
+
+  @media screen and (max-width: 650px) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 export default Persons;
