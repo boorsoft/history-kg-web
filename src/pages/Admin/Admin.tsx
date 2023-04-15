@@ -55,7 +55,6 @@ const AdminPage = () => {
       }),
     create: async (resource, params) => {
       if (resource === "books" && params.data.file) {
-
         let formData = new FormData();
 
         formData.append("title", params.data.title);
@@ -70,8 +69,28 @@ const AdminPage = () => {
           data: formData,
           url: `${API_URL}/${resource}`,
           headers: {
-            'Content-Type': 'application/pdf',
-            'Authorization': `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/pdf",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+      }
+
+      if (resource === "persons" && params.data.image) {
+        let formData = new FormData();
+
+        formData.append("firstName", params.data.firstName);
+        formData.append("lastName", params.data.lastName);
+        formData.append("bio", params.data.bio);
+        formData.append("image", params.data.image.rawFile);
+        formData.append("subjectId", params.data.subjectId);
+
+        return axios({
+          method: "POST",
+          data: formData,
+          url: `${API_URL}/${resource}`,
+          headers: {
+            "Content-Type": "image/*",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
       }
@@ -81,9 +100,9 @@ const AdminPage = () => {
         data: params.data,
         url: `${API_URL}/${resource}`,
         headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-        }
-      }).then((res) => ({data: {...params.data, id: 1}}))
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => ({ data: { ...params.data, id: 1 } }));
     },
   };
 
@@ -118,7 +137,7 @@ const AdminPage = () => {
         create={QuizCreate}
         edit={QuizEdit}
       />
-      <Resource 
+      <Resource
         name="articles"
         list={ArticlesList}
         create={ArticleCreate}
