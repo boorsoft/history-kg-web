@@ -2,6 +2,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createGlobalStyle } from "styled-components";
+import { MantineProvider } from "@mantine/core";
 
 import RootRouter from "./router/RootRouter";
 import Wrapper from "./components/Wrapper";
@@ -14,12 +15,14 @@ const App = () => {
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
-        <div className="App">
-          <Wrapper>
-            <GlobalStyles />
-            <RootRouter />
-          </Wrapper>
-        </div>
+        <MantineProvider withGlobalStyles withNormalizeCSS>
+          <div className="App">
+            <Wrapper>
+              <GlobalStyles />
+              <RootRouter />
+            </Wrapper>
+          </div>
+        </MantineProvider>
       </QueryClientProvider>
     </Provider>
   );

@@ -12,12 +12,24 @@ import ArticlesPage from "../pages/Articles/ArticlesPage";
 import SingleArticlePage from "../pages/Articles/SingleArticlePage";
 import BooksPage from "../pages/Books/BooksPage";
 import Download from "../pages/Download/Download";
+import AdminLayout from "../pages/NewAdmin/AdminLayout";
+import AdminBooks from "../pages/NewAdmin/pages/AdminBooks";
 
 const RootRouter = () => {
   return (
     <div>
       <BrowserRouter>
         <Routes>
+          <Route
+            path={ROUTES.NEW_ADMIN + "/*"}
+            element={
+              <AdminLayout>
+                <Routes>
+                  <Route path="/books" element={<AdminBooks />} />
+                </Routes>
+              </AdminLayout>
+            }
+          />
           <Route path={ROUTES.ADMIN + "/*"} element={<AdminPage />} />
           <Route path={ROUTES.HOME} element={<Home />} />
           <Route path={ROUTES.BOOKS} element={<BooksPage />} />
